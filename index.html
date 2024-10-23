@@ -16,6 +16,12 @@
             margin: 20px;
         }
     </style>
+    <script>
+        // Function to navigate to a URL
+        function goToUrl(url) {
+            window.location.href = url;
+        }
+    </script>
   </head>
   <body>
   <div id="ncstate-utility-bar" data-prop-show-brick="1" data-prop-cse-id="00578865650663686:7xmauxacbr4" ></div>
@@ -23,21 +29,21 @@
 <div style="margin:70px 15px 20px 20px;">
     <h1>NC TraCS: Technical Support</h1>
     
-    <a href="https://tracs.unc.edu/" >NC TraCS</a> has partnered with the NCSU's Data Science
+    <a href="https://tracs.unc.edu/" >NC TraCS</a> has partnered with the NC State's Data Science
     Academy to provide timely and targeted support to clinical researchers.
     <p>
-    We engage with the entire data lifecycle, but focus on processing, analysis, visualization, and interpretation.
+    We engage with the entire data lifecycle but focus on processing, analysis, visualization, and interpretation.
     <p>
     <img src="lifecycle.png" width="800px">
     <p>
 
 <div class ="centered-div">
-<button type="button" class="btn-primary">Request Assistance</button>
-<button type="button" class="btn-primary">Resources</button>
+<button onclick="goToUrl('https://docs.google.com/forms/d/e/1FAIpQLSfMQGCQtg0p8gk2t1lkefRuXnnImP1FLE3_Gm_H8L6TVrQ7pA/viewform?usp=sharing')" type="button" class="btn-primary" >Request Assistance</button>
+<button onclick="goToUrl('resources.html')" type="button" class="btn-primary">Resources</button>
 </div>
 <p>
-    <video width="800" controls>
-        <source src="videos/IntroAndWelcome.mp4" type="video/mp4">
+    <video width="800" controls poster="videos/welcome.png">
+        <source src="videos/IntroAndWelcome.mp4" type="video/mp4" >
         Your browser does not support the video tag.
     </video>
         
