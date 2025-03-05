@@ -1,0 +1,248 @@
+WEBVTT
+
+00:00:01.000 --> 00:00:03.000
+Welcome to the NCTraCS tutorial series.
+
+00:00:04.000 --> 00:00:09.000
+The topic of this presentation is about R-squared and adjusted R-squared.
+
+00:00:10.000 --> 00:00:18.000
+There are key metrics for assessing how well a regression model fits the data, and understanding them is essential in regression analysis. 
+
+00:00:21.000 --> 00:00:28.000
+As a reminder, our motivating example is to investigate whether smoking reduces lung function.
+
+00:00:29.000 --> 00:00:32.000
+Forced Vital Capacity was measured in 100 men,
+
+00:00:32.000 --> 00:00:36.000
+of whom 36 were smokers and 64 were non-smokers.
+
+00:00:38.000 --> 00:00:41.000
+We have the statistics of these two groups, including mean,
+
+00:00:42.000 --> 00:00:50.000
+standard deviation, standard error, listed in the table. R squared is a statistical measure that shows 
+
+00:00:50.000 --> 00:00:57.000
+the proportion of variance in the response variable that can be explained by the independent variables in the model.
+
+00:00:58.000 --> 00:01:01.000
+It indicates how well the model fits the data.
+
+00:01:02.000 --> 00:01:04.000
+In the example of lung function and smoker study.
+
+00:01:05.000 --> 00:01:11.000
+We are asking if smoking status is associated with low lung function.
+
+00:01:12.000 --> 00:01:17.000
+Here, the FVC is the response variable, or we call it the dependent variable.
+
+00:01:18.000 --> 00:01:26.000
+There are independent variables, or we call predictors including the smoking status that we believe 
+
+00:01:26.000 --> 00:01:28.000
+might influence lung function.
+
+00:01:29.000 --> 00:01:30.000
+For example,
+
+00:01:30.000 --> 00:01:36.000
+the smoking status represents whether an individual is a smoker or not.
+
+00:01:37.000 --> 00:01:38.000
+If they are a smoker,
+
+00:01:39.000 --> 00:01:42.000
+we use one to indicate the status, and if not,
+
+00:01:43.000 --> 00:01:45.000
+we use zero. And of course,
+
+00:01:45.000 --> 00:01:51.000
+there could be other independent variables that we are interested in, such as age,
+
+00:01:51.000 --> 00:01:52.000
+gender, etc.
+
+00:01:54.000 --> 00:02:01.000
+The formula of R squared is that, one minus the sum of squares of residuals divided by the total sum of squares.
+
+00:02:03.000 --> 00:02:09.000
+The numerator SSR represents the variation not explained by the model.
+
+00:02:10.000 --> 00:02:15.000
+While the denominator SST represents the total variation in the response variable.
+
+00:02:17.000 --> 00:02:21.000
+The value of R squared ranges from 0 to 1.
+
+00:02:22.000 --> 00:02:23.000
+When R squared equals zero,
+
+00:02:24.000 --> 00:02:28.000
+it means the model explains none of the variability in the response data.
+
+00:02:30.000 --> 00:02:33.000
+And while when R square equals one,
+
+00:02:33.000 --> 00:02:35.000
+it means the model explains
+
+00:02:36.000 --> 00:02:44.000
+all of the variability in the response data. Higher values of R squared indicate a 
+
+00:02:44.000 --> 00:02:46.000
+better fit of the model to the data.
+
+00:02:47.000 --> 00:02:48.000
+For example,
+
+00:02:48.000 --> 00:02:56.000
+an R squared of 0.8 suggests that 80% of the variability in the response variable can be explained 
+
+00:02:56.000 --> 00:02:58.000
+by the predictor variables in the model.
+
+00:03:01.000 --> 00:03:06.000
+However, a higher R-squared value does not always mean a better model.
+
+00:03:06.000 --> 00:03:14.000
+Sometimes, adding more predictors can artificially inflate R squared even if the additional 
+
+00:03:14.000 --> 00:03:17.000
+variables do not actually improve the model.
+
+00:03:19.000 --> 00:03:27.000
+So we use a modified version of r-squared, which is called the adjusted r-squared, to finalize the 
+
+00:03:27.000 --> 00:03:29.000
+addition of irrelevant predictors.
+
+00:03:32.000 --> 00:03:38.000
+The adjusted R squared is a modified version of the R squared that finalizes the audition of irrelevant predictors.
+
+00:03:40.000 --> 00:03:48.000
+Unlike R squared, it does not automatically increase when more predictors are added to the model.
+
+00:03:48.000 --> 00:03:56.000
+Adjusted r square can sometimes decrease if a predictor does not contribute significantly to the model's explantory 
+
+00:03:56.000 --> 00:04:01.000
+power. Here is the formula of the adjusted R squared.
+
+00:04:01.000 --> 00:04:09.000
+It equals one minus one minus R squared times N minus one divided by N minus P minus 
+
+00:04:09.000 --> 00:04:10.000
+one. Here,
+
+00:04:10.000 --> 00:04:14.000
+N is the number of observations, and P is the number of predictors.
+
+00:04:16.000 --> 00:04:23.000
+So you can see when P decreases when n is unchanged, adjusted r-squared decreases as well.
+
+00:04:25.000 --> 00:04:32.000
+The main reason that we use adjusted elsewhere includes, first, adjusted r-squared
+
+00:04:32.000 --> 00:04:37.000
+accounts for the number of predictors relative to the number of observations,
+
+00:04:38.000 --> 00:04:41.000
+providing a more reliable metric of model fit.
+
+00:04:42.000 --> 00:04:50.000
+Secondly, it is particularly useful when comparing models with different numbers of predictors as it penalizes overfitting 
+
+00:04:51.000 --> 00:04:54.000
+by adjusting the number of variables.
+
+00:04:56.000 --> 00:05:04.000
+Here is the comparison of these two metrics. R squared increases or remains the same as more 
+
+00:05:04.000 --> 00:05:12.000
+predictors are added while adjusted R squared only increases if the new predictor improves the model fit more than 
+
+00:05:12.000 --> 00:05:13.000
+would be expected by chance.
+
+00:05:15.000 --> 00:05:18.000
+Using the dataset from the FVC example,
+
+00:05:18.000 --> 00:05:19.000
+as we talked before,
+
+00:05:20.000 --> 00:05:21.000
+we established two models.
+
+00:05:24.000 --> 00:05:32.000
+Here, FVC is our dependent variable or response variable, and smoking status is the main independent 
+
+00:05:32.000 --> 00:05:35.000
+variable or predictor variable.
+
+00:05:37.000 --> 00:05:45.000
+The random noise predictor is an unnecessary predictor that does not actually explain 
+
+00:05:45.000 --> 00:05:53.000
+FVC. The model one, you can see, only has the smoking status predictor 
+
+00:05:54.000 --> 00:05:56.000
+in the model. While model two has 
+
+00:05:56.000 --> 00:05:59.000
+the other random predictor in the model.
+
+00:06:01.000 --> 00:06:06.000
+From the results, we can see the R squared are the same for these two models.
+
+00:06:08.000 --> 00:06:16.000
+While the adjusted R squared accounts for the unnecessary predictor and adjusts downwards for model two, showing 
+
+00:06:16.000 --> 00:06:20.000
+that adding a random predictor does not actually improve the model.
+
+00:06:22.000 --> 00:06:30.000
+One thing to note is that this is just a simple example with synthetic data and the R squared and 
+
+00:06:30.000 --> 00:06:34.000
+adjusted R squared values are relatively small here in the table.
+
+00:06:35.000 --> 00:06:37.000
+And in real-world applications,
+
+00:06:38.000 --> 00:06:41.000
+we typically expect these values to be higher,
+
+00:06:41.000 --> 00:06:47.000
+often over 80%, to consider the model reliable and effective.
+
+00:06:48.000 --> 00:06:56.000
+However, the acceptable level of R squared can vary based on the 
+
+00:06:56.000 --> 00:07:00.000
+concept and the complexity of the data being modeled.
+
+00:07:02.000 --> 00:07:09.000
+The takeaway message is that both R squared and adjusted R squared are helpful metrics,
+
+00:07:10.000 --> 00:07:18.000
+but R squared can be misleading sometimes, when predictors are added to a model, as it always increases or 
+
+00:07:19.000 --> 00:07:22.000
+stays the same. And adjusted R squares
+
+00:07:22.000 --> 00:07:24.000
+give a more reliable model,
+
+00:07:24.000 --> 00:07:30.000
+give a more reliable measure of the model fit by penalizing unnecessary predictors.
+
+00:07:32.000 --> 00:07:38.000
+It only increases if the new predictor actually improves the model's explainatory power.
+
+00:07:41.000 --> 00:07:44.000
+Thank you for your attention. I will see you in the next video.
+

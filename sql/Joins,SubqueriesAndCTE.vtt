@@ -1,0 +1,194 @@
+WEBVTT
+
+00:00:03.000 --> 00:00:04.000
+Hi, everyone! In this video,
+
+00:00:05.000 --> 00:00:07.000
+we'll be learning more about joins,
+
+00:00:08.000 --> 00:00:10.000
+subqueries and common table expressions,
+
+00:00:11.000 --> 00:00:15.000
+also known as CTEs. So what is a
+
+00:00:15.000 --> 00:00:21.000
+Join? Join is used to combine rows from different tables, two or more than two,
+
+00:00:21.000 --> 00:00:22.000
+based on a shared column.
+
+00:00:24.000 --> 00:00:25.000
+Let us see an example.
+
+00:00:27.000 --> 00:00:31.000
+Write a query to find the drug_concept_name linked to the drug_concept
+
+00:00:32.000 --> 00:00:33.000
+id, for example,
+
+00:00:34.000 --> 00:00:40.000
+If I'm querying the drug exposure table and I want to find the person ID and the drug concept ID.
+
+00:00:40.000 --> 00:00:43.000
+But I don't know what this concept_ID stands for.
+
+00:00:44.000 --> 00:00:45.000
+So to do that,
+
+00:00:46.000 --> 00:00:51.000
+I'll have to join the drug exposure table with the concept table on a common column.
+
+00:00:51.000 --> 00:00:57.000
+That is the concept_id in in the concept table and the drug_concept_id on the drug_exposure table.
+
+00:00:58.000 --> 00:01:05.000
+And I'll specify the drug concept ID value for which I need to find it out.
+
+00:01:07.000 --> 00:01:11.000
+So if I run this query Oops,
+
+00:01:12.000 --> 00:01:13.000
+sorry, OK,
+
+00:01:14.000 --> 00:01:15.000
+let me just do it again.
+
+00:01:20.000 --> 00:01:28.000
+Yep, so you can see that these are the person IDs with the drug concept ID and the drug name. 
+
+00:01:32.000 --> 00:01:35.000
+So that is how you can join multiple columns sorry
+
+00:01:35.000 --> 00:01:40.000
+You can join multiple tables on a common column and fetch your results.
+
+00:01:42.000 --> 00:01:44.000
+Next, let's look at subqueries.
+
+00:01:46.000 --> 00:01:49.000
+Subqueries are made up of two or more,
+
+00:01:50.000 --> 00:01:51.000
+than two queries.
+
+00:01:51.000 --> 00:01:57.000
+For example, you'll have an inner query that you can see over here and an outer query.
+
+00:01:57.000 --> 00:01:58.000
+which is nothing but this.
+
+00:02:01.000 --> 00:02:03.000
+So we have.
+
+00:02:03.000 --> 00:02:07.000
+We have the task of finding patients who had a drug exposure after being diagnosed with hypertension.
+
+00:02:09.000 --> 00:02:11.000
+So, uh, we have the drug exposure table,
+
+00:02:12.000 --> 00:02:17.000
+but we want only those person IDs who were diagnosed with hypertension.
+
+00:02:18.000 --> 00:02:19.000
+So in the where clause,
+
+00:02:20.000 --> 00:02:27.000
+I will specify that only select those person IDs where the condition concept ID is 31967.
+
+00:02:29.000 --> 00:02:32.000
+Since this condition concept ID is not present in the drug exposure table,
+
+00:02:33.000 --> 00:02:36.000
+I couldn't specify it in the WHERE clause directly,
+
+00:02:37.000 --> 00:02:39.000
+and that's why I used subquery.
+
+00:02:41.000 --> 00:02:42.000
+So if I run this,
+
+00:02:44.000 --> 00:02:46.000
+I can see that this is the person.
+
+00:02:46.000 --> 00:02:47.000
+This is the drug concept,
+
+00:02:48.000 --> 00:02:49.000
+and this was the drug exposure's start date.
+
+00:02:54.000 --> 00:02:56.000
+Next we have the common table expressions.
+
+00:02:59.000 --> 00:03:03.000
+This is used when we want to reuse our
+
+00:03:03.000 --> 00:03:05.000
+subqueries.
+
+00:03:06.000 --> 00:03:14.000
+For example, it is used when we have complex queries that benefit from modularity, repeated logic 
+
+00:03:14.000 --> 00:03:17.000
+or when you want a query to be more readable and maintainable.
+
+00:03:19.000 --> 00:03:25.000
+So, the example is to find drugs prescribed to patients diagnosed with both hypertension and diabetes.
+
+00:03:27.000 --> 00:03:28.000
+So with the WITH clause,
+
+00:03:29.000 --> 00:03:33.000
+we can see that we can create a common table expression.
+
+00:03:33.000 --> 00:03:35.000
+Hypertension_patients.
+
+00:03:37.000 --> 00:03:39.000
+We have specified the condition over here,
+
+00:03:40.000 --> 00:03:43.000
+so all the person IDs are stored in hypertension patients.
+
+00:03:44.000 --> 00:03:48.000
+All the person IDs with diabetes are stored in diabetes patients.
+
+00:03:50.000 --> 00:03:58.000
+Then we use the INTERSECT keyword to find the common person IDs for both of these concept IDs and 
+
+00:03:58.000 --> 00:04:06.000
+then we can use this particular common table expression in the from clause and use that 
+
+00:04:06.000 --> 00:04:08.000
+and by joining on drug exposure and concept tables,
+
+00:04:09.000 --> 00:04:10.000
+we can get the person ID,
+
+00:04:11.000 --> 00:04:13.000
+the drug concept ID and the drug concept name.
+
+00:04:15.000 --> 00:04:16.000
+So if I run this query,
+
+00:04:17.000 --> 00:04:18.000
+let us see what is the result?
+
+00:04:24.000 --> 00:04:30.000
+Awesome. So here you can see the person ID the drug concept ID and what is the drug name.
+
+00:04:32.000 --> 00:04:40.000
+So JOIN is used when you are directly linking tables based on a key or a relationship. Subquery is used when you 
+
+00:04:40.000 --> 00:04:45.000
+need to filter, aggregate or calculate values that are based on the result of another query.
+
+00:04:47.000 --> 00:04:54.000
+And CTEs is used when you want to do some repeated logic in your queries so I can use this diabetes_patients,
+
+00:04:55.000 --> 00:04:58.000
+hypertension_diabetes_patients in other queries as well.
+
+00:04:59.000 --> 00:04:59.000
+Thank you! 
+
