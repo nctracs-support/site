@@ -23,69 +23,76 @@
         h2 { margin-top: 30px;}
         h3 { margin-top: 10px;}
     </style>
-    <script>
-        // Function to navigate to a URL
-        function goToUrl(url) {
-            window.location.href = url;
-        }
-    </script>
   </head>
   <body>
   <div id="ncstate-utility-bar" data-prop-show-brick="1" data-prop-cse-id="00578865650663686:7xmauxacbr4" ></div>
 <script src="https://cdn.ncsu.edu/brand-assets/utility-bar/v3/ncstate-utility-bar.js"></script>
 <div style="margin:70px 15px 20px 20px;">
-<h1>NC TraCS: Technical Resources</h1>
-This page contains a number of education resources (videos, slides,and Jupyter notebooks) on various parts of the 
-data science lifecycle/process, but geared towards medical research using
-OHDSI's <a href="https://www.ohdsi.org/data-standardization/">OMOP Common Data Model</a>.
+<h2> Comprehensive Resource Guide for Clinical Researchers Utilizing the OMOP Common Data Model</h2>
+The Observational Health Data Sciences and Informatics (OHDSI) initiative and its OMOP Common Data Model (CDM) have revolutionized collaborative clinical research by standardizing heterogeneous healthcare data into a unified framework. This report synthesizes critical resources&mdash;including tools, publications, training materials, and community platforms&mdash;to empower researchers navigating OMOP-based studies.
+<h3>Foundational Resources for OMOP CDM Implementation </h3>
+<h4>Standardized Data Model Documentation</h4>
+The <strong><a href='https://www.ohdsi.org/data-standardization/'>OMOP CDM specification</a></strong>, maintained by the OHDSI community, defines the structure, conventions, and vocabulary requirements for transforming raw healthcare data into the OMOP format. The official GitHub repository provides Data Definition Language (DDL) scripts for creating OMOP-compliant tables across database platforms like PostgreSQL, RedShift, and SQL Server. The OHDSI website further elaborates on the model&rsquo;s design philosophy, emphasizing its role in enabling reproducible analytics across disparate datasets.
+<p>
+OHDSI GitHub: <a href="https://github.com/OHDSI/CommonDataModel">https://github.com/OHDSI/CommonDataModel</a><br>
+OMOP Introduction: <a href="https://health.ucdavis.edu/data/omop.html">https://health.ucdavis.edu/data/omop.html</a>
 
-If there's a specific topic, you would like to covered, please submit a 
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSdf7ZYsPn4YMk-KW3AMaq6uMD7SYTtjwWX0OId-2T9qnxbdYg/viewform?usp=header">request</a>.
+<h4>Vocabulary Harmonization Tools</h4>
+The OHDSI Standardized Vocabularies map diverse coding systems (e.g., SNOMED-CT, ICD-10, RxNorm) to OMOP concepts, ensuring semantic interoperability. Researchers access these vocabularies via the Athena portal, which supports concept browsing, mapping validation, and download. For genomic data integration, the KOIOS tool harmonizes variant call formats (VCFs) with OMOP genomic concepts, automating HGVSg identifier generation and concept ID assignment.
+<p>
+Athena Website: <a href="https://athena.ohdsi.org/">https://athena.ohdsi.org/</a><br>
+KOIOS: <a href="https://github.com/OHDSI/Koios">https://github.com/OHDSI/Koios</a>
 
+<h3>Analytical Tools and Software Ecosystem</h3>
+<h4>Cohort Development and Patient-Level Prediction </h4>
+ATLAS, OHDSI&rsquo;s flagship web application, enables cohort definition through intuitive concept searches and temporal criteria. Its Patient-Level Prediction (PLP) module integrates machine learning models for risk stratification, leveraging R packages like 
+PatientLevelPrediction
+and 
+DeepPatientLevelPrediction. 
+Comparative studies validate ATLAS&rsquo;s feasibility against custom R workflows, particularly for logistic regression and tree-based models. For advanced users, the 
+Gaia
+toolchain incorporates geospatial determinants of health into OMOP analyses via 
+gaiaDB
+(geospatial staging database) and 
+gaiaCore
+(R package).
+<p>
+ATLAS Website: <a href="https://github.com/OHDSI/Atlas">https://github.com/OHDSI/Atlas</a><br>
+Gaia: <a href="https://github.com/OHDSI/GIS">https://github.com/OHDSI/GIS</a>
 
-<h2>Data Science Workflow</h2>
-<a href="data_science/ModelingFramework.mp4">Video</a>&nbsp;&nbsp;<a href="data_science/ModelingFramework.pptx">Slides</a> </td>
-
-<h2>Exploratory Data Analysis</h2>
-<a href="eda/EDA_Tutorial.mp4">Video</a>&nbsp;&nbsp;
-                                 <a href="eda/EDA_Tutorial.ipynb">Notebook</a>&nbsp;&nbsp;
-                                 <a href="eda/COVID-19-BMI.csv">Data</a> </td>
-
-<h2>Hypothesis Testing</h2>
-
-<h3>Rejection Region</h3>
-Explore key concepts and important information about the Rejection Region in Hypothesis Testing. This tutorial uses real-world examples to guide you through step-by-step calculations and statistical reasoning.<br/>
-<a href="hypothesis/1_1_HT_RejectionRegion.mp4">Video</a>&nbsp;&nbsp;<a href="hypothesis/1_1_HT_RejectionRegion.pptx">Slides</a>
-
-
-<h3>Type I and Type II Errors</h3>
-Learn about Type I and Type II errors in hypothesis testing, including their meanings, implications, and how they affect statistical decision-making.<br/>
-<a href="hypothesis/1_2_HT_TypeIandIIError.mp4">Video</a>&nbsp;&nbsp;<a href="hypothesis/1_2_HT_TypeIandIIError.pptx">Slides</a><br>
-
-<h3>Power Function</h3>
-Understand the power function in hypothesis testing and its relationship with sample size, significance level, effect size, and Type II errors. 
-<br/>
-<a href="hypothesis/1_3_HT_PowerFunction.mp4">Video</a>&nbsp;&nbsp;<a href="hypothesis/1_3_HT_PowerFunction.pptx">Slides</a><br>
-
-<h3>Significance Level</h3>
-Learn about the significance level (alpha) in hypothesis testing, its role in defining the rejection region, and its impact on Type I and Type II errors. 
-<br/>
-<a href="hypothesis/1_4_HT_SignificanceLevel.mp4">Video</a>&nbsp;&nbsp;<a href="hypothesis/1_4_HT_SignificanceLevel.pptx">Slides</a>
-
-<h3>P-values</h3>
-Learn about the P-value in hypothesis testing, how it helps determine statistical significance, and its relationship with the rejection region and significance level.</br>
-<a href="hypothesis/1_5_HT_PValue.mp4">Video</a>&nbsp;&nbsp;<a href="hypothesis/1_5_HT_PValue.pptx">Slides</a>&nbsp;&nbsp;
-  <a href="hypothesis/1_HT_YS.R">R source code</a>
+<h4>Data Quality Assessment</h4>
+The  Data Quality Dashboard (DQD) evaluates OMOP datasets against 3,300+ predefined checks, categorizing issues using the Kahn Framework (completeness, plausibility, conformance). Complementing this,  CohortDiagnostics  identifies inconsistencies in cohort definitions across institutions, critical for multicenter studies. A 2025 comparative analysis of Johns Hopkins and Washington University datasets demonstrated how these tools uncover variability in measurement vocabularies and demographic completeness. 
+<p>
+Data Quality Dashboard:  <a href="https://github.com/OHDSI/DataQualityDashboard">https://github.com/OHDSI/DataQualityDashboard</a><br>
+Cohort Diagnostics:  <a href="https://github.com/OHDSI">https://github.com/OHDSI</a> 
 
 
+<h3>Training and Community Support</h3>
+<h4>Educational Platforms</h4>
+The OHDSI Symposium annually features workshops on OMOP CDM ETL processes, ATLAS analytics, and predictive modeling. Recordings and slides are archived on the OHDSI YouTube channel. Institutional training programs, like UF Health&rsquo;s  ATLAS Tutorials <span>, provide step-by-step guides for cohort creation and vocabulary searches. For self-paced learning, The Book of OHDSI  offers chapters on CDM design, standardized analytics, and ethical considerations.
+<p>
+Book of OHDSI: <a href="https://ohdsi.github.io/TheBookOfOhdsi/">https://ohdsi.github.io/TheBookOfOhdsi/</a><br>
+EHDEN Academy: <a href="https://academy.ehden.eu/course/view.php?id%3D4">https://academy.ehden.eu/course/view.php?id=4</a><br>
+OHDSI Youtube Channel: <a href="https://www.youtube.com/@OHDSI">https://www.youtube.com/@OHDSI</a><br>
+StanfordSTARR: <a href="https://www.youtube.com/@stanfordstarr8476">https://www.youtube.com/@stanfordstarr8476</a><br>
+UF Health&#39;s ATLAS Tutorial: <a href="https://idr.ufhealth.org/research-services/feasibility-cohort-discovery/uf-health-omop-atlas-training-tools/">https://idr.ufhealth.org/research-services/feasibility-cohort-discovery/uf-health-omop-atlas-training-tools/</a>
 
+<h4>Collaborative Forums</h4>
+The OHDSI Forum hosts active discussions on technical challenges, such as medical image data integration and vocabulary mapping ambiguities. Researchers troubleshoot ETL pipelines, share optimization strategies, and propose CDM extensions. The  OHDSI GitHub Organization (321+ repositories) fosters open-source collaboration, with repositories like CommonDataModel and FeatureExtraction enabling version-controlled contributions
+<p>
+OHDSI Forum:  <a href="https://forums.ohdsi.org/t/help-with-omop-cdm-setup-medical-images-extension/20746&amp;sa=D&amp;source=editors&amp;ust=1741181747850881&amp;usg=AOvVaw1sdvIaSwTS2zI-E7-3Pp63">https://forums.ohdsi.org/t/help-with-omop-cdm-setup-medical-images-extension/20746</a> 
 
+<h4>Synthetic and Real-World Data Sources</h4>
+The  CMS SynPUF dataset, a synthetic Medicare beneficiary sample, allows method validation without privacy constraints. Institutions like URMC and UC Davis Health provide de-identified OMOP datasets spanning millions of patients, accessible via IRB-approved requests. The  OHDSI Network Research Initiative  facilitates federated analyses across 20+ global sites, supporting studies on drug safety, COVID-19 outcomes, and health equity.
+<p>
+CMS SynPUF:  <a href="https://health.ucdavis.edu/data/omop.html">https://health.ucdavis.edu/data/omop.html</a><br>
+OHDSI Network Research Initiative:  <a href="https://www.ohdsi.org/network-research-studies/"">https://www.ohdsi.org/network-research-studies/</a> 
+<p>&nbsp;</p>
 <div class ="centered-div">
-<button onclick="goToUrl('index.html')" type="button" class="btn-primary">Support Home</button>
+<a href="index.html" role="button" class="btn btn-primary">Support Home</href></a>
 </div>
 
-<hr>
-<em>Note:</em> All provided data is synthetic - no real patient data is available on this page.
+
 
 </div>        
     <!-- Optional JavaScript -->
