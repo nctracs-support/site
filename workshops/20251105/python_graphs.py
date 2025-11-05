@@ -49,7 +49,7 @@ np.random.seed(42)
 
 
 # Load data
-df = pd.read_csv("sample_dataset.csv")
+df = pd.read_csv("final_with_deceased.csv")
 
 
 # ## Exploratory Data Analysis (EDA)
