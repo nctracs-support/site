@@ -1,0 +1,386 @@
+---
+title: "R Notebook for Data Viz for Clinical Data"
+output: html_notebook
+---
+
+We are using a common dataset across the R and Python coding examples.
+
+The code below reads in the csv file final_with_deceased.csv. It also calls the libraries we are going to use.
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+mydata <- as.data.frame(read.csv("final_with_deceased.csv"))
+
+```
+
+The first step when working with a data file is an exploratory data analysis.
+
+```{r}
+
+head(mydata, 5) # prints first five rows
+tail(mydata, 5) # prints last five rows
+sample_n(mydata, 5) # prints five randomly selected rows
+
+print(dim(mydata)) # print number of columns and rows
+summary(mydata) # overview of each variable in the dataset
+
+```
+
+All of our dates are character variables, so let's convert those to dates.
+
+```{r}
+
+mydata <- mydata %>%
+            mutate(visit_start_date = as.Date(visit_start_date)) %>%
+            mutate(visit_end_date = as.Date(visit_end_date) ) %>%
+            mutate(birth_datetime = as.Date(birth_datetime)) %>%
+            mutate(flu_last_administered = as.Date(flu_last_administered) ) %>%
+            mutate(tdap_last_administered = as.Date(tdap_last_administered) ) %>%
+            mutate(mmr_last_administered = as.Date(mmr_last_administered)) %>%
+            mutate(polio_last_administered = as.Date(polio_last_administered))
+
+summary(mydata)
+
+```
+
+Next, lets look into any missing data.
+
+```{r}
+
+n <- nrow(mydata) # n is number of rows (observations)
+
+missing_count <- colSums(is.na(mydata)) # calculate number missing
+missing_pct <- missing_count/n * 100 # calculate percent missing
+non_missing_count <- n - missing_count # calculate number non-missing
+
+print(cbind(missing_count, missing_pct, non_missing_count))
+```
+
+Now we need to prepare our data for analysis.
+
+```{r}
+
+# create a variable for length of stay
+mydata$los = as.numeric(mydata$visit_end_date - mydata$visit_start_date)
+summary(mydata$los)
+
+# modify labels for the deceased column
+mydata$deceased_flag = mydata$deceased
+mydata = mydata %>%
+  mutate(deceased_flag = recode(deceased_flag, 'Y' = 'Deceased', 'N' = 'Alive'))
+
+# make a column for visit month and year
+mydata$visit_year = as.numeric(format(mydata$visit_start_date, "%Y"))
+mydata$visit_month = as.numeric(format(mydata$visit_start_date, "%m"))
+
+# make gender, race, and ethnicity factors
+
+mydata$race_source_value = as.factor(mydata$race_source_value)
+mydata$ethnicity_source_value = as.factor(mydata$ethnicity_source_value)
+mydata$gender_source_value = as.factor(mydata$gender_source_value)
+
+# make other categorical variables into factors
+
+
+mydata$visit_type = as.factor(mydata$visit_type)
+mydata$deceased = as.factor(mydata$deceased)
+mydata$deceased_flag = as.factor(mydata$deceased_flag)
+```
+
+After we do this work, we can summarize the data again!
+
+```{r}
+
+summary(mydata)
+
+```
+
+The last step in data cleaning is separating out the conditions! Right now, they are all in one string together, separated by a colon (:).
+
+```{r}
+
+head(mydata$condition, 10)
+
+# we're going to separate each condition into a row
+longdata <- mydata %>% mutate(condition = strsplit(condition, ':')) %>%
+  unnest(condition) %>%
+  group_by(person_id) %>%
+  mutate(row=row_number()) 
+
+longdata$condition <- as.factor(longdata$condition)
+summary(longdata$condition)
+
+# look at conditions by visit types
+
+longdata %>% group_by(visit_type, condition) %>% summarize(n = n())
+
+
+
+```
+
+### Distribution Plots of single variables
+
+Distributions can be shown several ways.
+
+One way is a column histogram. Let's look at age at visit (in years).
+
+```{r}
+
+# this histogram has 30 bins
+mydata %>%
+  ggplot(aes(x=age_at_visit_years)) +
+  geom_histogram(bins=30, color="#e9ecef", alpha=0.4) +
+    labs(title = "Distribution of Age at Visit (years)") +
+      xlab("Age (years)")
+
+# this histogram only has 25 bins
+mydata %>%
+  ggplot(aes(x=age_at_visit_years)) +
+  geom_histogram(bins=25, color="#e9ecef", alpha=0.4) +
+    labs(title = "Distribution of Age at Visit (years)") +
+      xlab("Age (years)")
+
+
+```
+
+Boxplots are another way to show distributions.
+
+```{r}
+  
+# boxplot of BMI
+ggplot(data=subset(mydata, !is.na(bmi)), aes(y=bmi)) +
+    geom_boxplot() +
+    ggtitle("BMI Distribution") +
+    ylab("BMI")
+
+```
+
+Let's also look at the distribution of the length of stay.
+
+```{r}
+
+mydata %>%
+  ggplot(aes(x=los)) +
+  geom_histogram(bins=30, color="#e9ecef", alpha=0.4) +
+    labs(title = "Distribution of Length of Stay (Days)") +
+      xlab("Days")
+
+
+```
+
+Running this code shows there is clearly a value that makes no sense!
+
+We can look in the data for which observations may be causing this issue. We'll look at visits that are not outpatient visits that do have more than 100 days in the hospital.
+
+```{r}
+
+mydata %>%
+  filter(los > 100, visit_type != 'Outpatient Visit')
+
+```
+
+Let's just look at values that are less than 100 days and that are not outpatient visits
+
+```{r}
+
+mydata %>%
+  filter(los < 100, visit_type != 'Outpatient Visit') %>%
+  ggplot(aes(x=los)) +
+    geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.8, bins=30) + 
+      labs(title ="Distribution of Length of Stay (Non-Outpatient Visits)") + 
+      xlab("Length of Stay (Days)")
+
+
+mydata %>%
+  filter(los < 100, visit_type != 'Outpatient Visit') %>%
+  ggplot(aes(x=los)) +
+    geom_density(fill="#69b3a2", color="#e9ecef", alpha=0.8) + 
+      labs(title ="Distribution of Length of Stay (Non-Outpatient Visits)") + 
+      xlab("Length of Stay (Days)")
+
+```
+
+### Histogram and Density across groups
+
+We can make histograms and density plots of any continuous variable grouped by a second variable.
+
+Here are some of blood pressure by gender.
+
+```{r}
+
+# create a new dataset that is long-- with a row for systolic and a row for diastolic blood pressure per visit and person
+
+bplong <- mydata %>%
+  pivot_longer(cols = systolic:diastolic, names_to = 'Blood_Pressure_Type', values_to = 'Blood_Pressure_Value' )
+
+bplong %>%
+  filter(!is.na(Blood_Pressure_Value)) %>%
+  ggplot(aes(x=gender_source_value, y=Blood_Pressure_Value , fill=Blood_Pressure_Type)) +
+  geom_boxplot() +
+    scale_fill_manual(values=c("darkgreen", "orange")) +
+    labs(title = "Blood Pressure by Gender") + 
+      xlab("Gender")
+
+```
+
+We can also use a bar chart to plot the mean and a standard error bar for each of the above categories.
+
+```{r}
+
+bplong %>%
+  filter(!is.na(Blood_Pressure_Value)) %>%
+  ggplot(aes(x = interaction(Blood_Pressure_Type, gender_source_value), y = Blood_Pressure_Value)) +
+  geom_bar(stat = 'summary', fun = 'mean') +
+  labs(title = "Mean Blood Pressure by Gender") +
+  xlab("Blood Pressure and Gender") +
+  ylab("Blood Pressure (mmHg)")
+
+```
+
+You can also overlay the distributions of blood pressure by gender and have panels in your plot for systolic and diastolic.
+
+```{r}
+bp <- ggplot(bplong %>% filter(!is.na(Blood_Pressure_Value)), aes(x = Blood_Pressure_Value, fill=gender_source_value)) +
+  geom_density(alpha = 0.4) +
+  scale_color_manual(values = c("pink", "lightblue")) +
+  facet_wrap(~Blood_Pressure_Type)
+
+bp
+```
+
+Now let's look at a comparison of length of stay for inpatient visits by gender.
+
+```{r}
+
+# Histogram
+mydata %>%
+  filter(los < 100, visit_type != 'Outpatient Visit') %>%
+  ggplot(aes(x=los,fill=gender_source_value)) +
+    geom_histogram(alpha=0.8, bins=30) + 
+    scale_fill_manual(values=c("pink", "lightblue")) +
+      labs(title ="Distribution of Length of Stay (Non-Outpatient Visits)") + 
+      xlab("Length of Stay (Days)")
+
+# Density plots
+mydata %>%
+  filter(los < 100, visit_type != 'Outpatient Visit') %>%
+  ggplot(aes(x=los, fill=gender_source_value)) +
+    geom_density( alpha=0.4) +
+    scale_fill_manual(values=c("pink", "lightblue"))+
+      labs(title ="Distribution of Length of Stay (Non-Outpatient Visits)") + 
+      xlab("Length of Stay (Days)")
+
+# Boxplots
+
+mydata %>%
+  filter(los < 100, visit_type == 'Inpatient Visit') %>%
+  ggplot(aes(y=los, x=gender_source_value, fill=gender_source_value)) +
+  geom_boxplot() +
+  scale_fill_manual(values=c("pink", "lightblue")) +
+    labs(title = "Length of Stay for Inpatient Visits by Gender") + 
+      xlab("Gender") +
+      ylab("Length of Stay (days)")
+
+# Violin Plots
+
+
+mydata %>%
+  filter(los < 100, visit_type == 'Inpatient Visit') %>%
+  ggplot(aes(y=los, x=gender_source_value, fill=gender_source_value)) +
+  geom_violin() +
+  scale_fill_manual(values=c("pink", "lightblue")) +
+    labs(title = "Length of Stay for Inpatient Visits by Gender") + 
+      xlab("Gender") +
+      ylab("Length of Stay (days)")
+
+```
+
+There are a lot of ways to explore relationships between continuous data, as well.
+
+```{r}
+
+mydata %>%
+  filter(!is.na(respiratory_rate_per_minute)) %>%
+  filter(!is.na(oxygen_saturation_percent)) %>%
+  ggplot(aes(x = respiratory_rate_per_minute, y = oxygen_saturation_percent)) +
+  geom_point(color='steelblue', alpha = .1) +
+  labs(title ="Oxygen Saturation vs. Respiratory Rate") +
+  xlab("Respiratory Rate (breaths per minute") +
+  ylab("Oxygen Saturation (%)")
+
+```
+We can also look at age versus oxygen saturation by outcome.
+
+```{r}
+
+
+mydata %>%
+  filter(!is.na(oxygen_saturation_percent)) %>%
+  filter(!is.na(age_at_visit_years)) %>%
+  ggplot(aes(x = age_at_visit_years, y = oxygen_saturation_percent, color=deceased_flag)) +
+  geom_point(alpha = .1) +
+  labs(title ="Age vs. Oxygen Saturation by Outcome", color = "Outcome") +
+  xlab("Age (years)") +
+  ylab("Oxygen Saturation (%)")
+  
+```
+
+Here's another comparison with age.
+
+```{r}
+mydata %>%
+  filter(los < 100, visit_type != 'Outpatient Visit', !is.na(age_at_visit_years), !is.na(gender_source_value)) %>%
+  ggplot(aes(x = age_at_visit_years, y = los, color=gender_source_value)) +
+  geom_point(alpha = .1) +
+  labs(title ="Age vs. Length of Stay by Gender for Non-Outpatient Visits", color = "Gender") +
+  xlab("Age (years)") +
+  ylab("Length of Stay (Days)")
+
+
+```
+
+We can also look at visit counts over time! These data come from a simluated dataset based on COVID data.
+
+
+```{r}
+
+data2020 = mydata %>% filter(visit_year == 2020)
+visitcounts = count(data2020, visit_start_date)
+
+
+visitcounts %>%
+  ggplot(aes(x=visit_start_date, y=n)) +
+  geom_line() +
+  xlab("Date") +
+  ylab("Visit count") +
+  labs(title = "Daily Visit Counts (2020)")
+
+
+```
+
+Let's categorize visits as COVID-related or non-COVID-related and plot both series.
+
+```{r}
+
+data2020$COVID = grepl('COVID',data2020$observation_source, fixed = TRUE)
+
+COVIDvisitcounts = count(data2020, visit_start_date, COVID)
+
+COVIDvisitcounts$COVID_formatted = ifelse(COVIDvisitcounts$COVID == TRUE, "COVID-related", "Non-COVID")
+
+
+COVIDvisitcounts %>%
+  ggplot(aes(x=visit_start_date, y=n, color=COVID_formatted)) +
+  geom_line() +
+  xlab("Date") +
+  ylab("Visit count") +
+  labs(title = "Daily Visit Counts (2020)", color="Category")
+
+
+
+
+```
+

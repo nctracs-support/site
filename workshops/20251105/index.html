@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.ncsu.edu/brand-assets/bootstrap-4/css/bootstrap.min.css">
+
+<link rel="icon" type="image/x-icon" href="https://cdn.ncsu.edu/brand-assets/favicons/favicon.ico" sizes="any">
+<link rel="icon" href="https://cdn.ncsu.edu/brand-assets/favicons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="https://cdn.ncsu.edu/brand-assets/favicons/apple-touch-icon.png">
+<link rel="manifest" href="https://cdn.ncsu.edu/brand-assets/favicons/manifest.webmanifest">
+
+    <title>NC TraCS: Clinical Data Visualization in R and Python Workshop</title>
+    <style>
+        .centered-div {
+            width: 80%;
+            text-align: center; /* This centers the content inside the div */
+            margin: 20px;
+        }
+        h2 { margin-top: 30px;}
+        h3 { margin-top: 10px;}
+    </style>
+  </head>
+  <body>
+  <div id="ncstate-utility-bar" data-prop-show-brick="1" data-prop-cse-id="00578865650663686:7xmauxacbr4" ></div>
+<script src="https://cdn.ncsu.edu/brand-assets/utility-bar/v3/ncstate-utility-bar.js"></script>
+<div style="margin:70px 15px 20px 20px;">
+<h2> Clinical Data Visualization in R and Python</h2>
+Workshop Slides: <a href="20251105-slides.pptx">Powerpoint</a>
+&nbpsl; &nbsp; <a href="20251105-slides.pdf">PDF</a>
+<br>
+<h2>Python</h2>
+<a href="python_graphs.ipynb">Python Notebook</a><br>
+<a href="python_graphs.html">HTML Export</a><br>
+<a href="python_graphs.py">Python Script</a>
+
+<h3>Environment Setup</h3>
+<p>
+<a href="https://www.python.org/">Python 3</a> is required to run this notebook. We recommend using <a href="https://docs.python.org/3/library/venv.html">venv</a> to create a virtual environment for the notebook
+and its dependencies.
+</p>
+<p>
+This notebook uses a small number of direct dependencies - most notably, Jupyter and <a href="https://seaborn.pydata.org/">Seaborn</a>. The Seaborn library is built
+on top of matplotlib and provides a simpler interface and more visually appealing default themes. The library will install pandas, numpy, matplotlib, and 
+other dependencies.
+</p>
+<pre><code>
+python3 -m venv venv
+source venv/bin/activate
+pip install jupyter seaborn
+</code></pre>
+
+For the Sankey diagram at the bottom of the notebook, we use <a href="https://plotly.com/python/">Plotly</a>.
+<pre><code>pip install plotly</code></pre>
+
+To run the notebook, start Jupyter from the command line:
+<pre><code>jupyter notebook</code></pre>
+
+<h2>R</h2>
+
+<a href="R_Graphs.Rmd">R Markdown File</a><br>
+<a href="R_Graphs.html">HTML Export</a><br>
+<h3>Environment Setup</h3>
+<p>
+  
+</p>
+
+<p>&nbsp;</p>
+<div class ="centered-div">
+<a href="index.html" role="button" class="btn btn-primary">Support Home</href></a>
+</div>
+
+
+
+</div>        
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://cdn.ncsu.edu/brand-assets/bootstrap-4/js/bootstrap.min.js"></script>
+  </body>
+</html>
