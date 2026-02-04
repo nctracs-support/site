@@ -21,53 +21,132 @@
   <body>
   <div id="ncstate-utility-bar" data-prop-show-brick="1" data-prop-cse-id="00578865650663686:7xmauxacbr4" ></div>
 <script src="https://cdn.ncsu.edu/brand-assets/utility-bar/v3/ncstate-utility-bar.js"></script>
-<div style="margin:70px 15px 20px 20px;">
-<h2> Clinical Data Visualization in R and Python</h2>
-Workshop Slides: <a href="20251105-slides.pptx">Powerpoint</a>
-&nbsp;&nbsp; <a href="20251105-slides.pdf">PDF</a>
-<br>
-Sample Dataset: <a href="final_with_deceased.csv">final_with_deceased.csv</a>
-<h2>Python</h2>
-<a href="python_graphs.ipynb">Python Notebook</a><br>
-<a href="python_graphs.html">HTML Export</a><br>
-<a href="python_graphs.py">Python Script</a>
+<div class="container-fluid" style="margin:70px 15px 20px 20px;">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <h1 class="mb-4">Clinical Data Visualization in R and Python</h1>
+            <p class="lead">
+                Workshop materials for creating effective visualizations of clinical data using R and Python.
+            </p>
 
-<h3>Environment Setup</h3>
-<p>
-<a href="https://www.python.org/">Python 3</a> is required to run this notebook. We recommend using <a href="https://docs.python.org/3/library/venv.html">venv</a> to create a virtual environment for the notebook
-and its dependencies.
-</p>
-<p>
-This notebook uses a small number of direct dependencies - most notably, Jupyter and <a href="https://seaborn.pydata.org/">Seaborn</a>. The Seaborn library is built
-on top of matplotlib and provides a simpler interface and more visually appealing default themes. The library will install pandas, numpy, matplotlib, and 
-other dependencies.
-</p>
-<pre><code>
-python3 -m venv venv
+            <!-- Workshop Materials Card -->
+            <div class="row g-4 mt-4">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Workshop Materials</h3>
+                            <p class="card-text">Download slides and sample data for this workshop.</p>
+
+                            <h5 class="mt-3">Slides</h5>
+                            <div class="d-flex gap-2 flex-wrap mb-4">
+                                <a href="20251105-slides.pptx" class="btn btn-primary">📊 PowerPoint</a>
+                                <a href="20251105-slides.pdf" class="btn btn-primary">📄 PDF</a>
+                            </div>
+
+                            <h5>Sample Dataset</h5>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="final_with_deceased.csv" class="btn btn-outline-primary">📊 final_with_deceased.csv</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Python Resources Card -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Python Resources</h3>
+                            <p class="card-text">Jupyter notebooks and scripts for Python-based visualizations.</p>
+
+                            <h5 class="mt-3">Materials</h5>
+                            <div class="d-flex gap-2 flex-wrap mb-4">
+                                <a href="python_graphs.ipynb" class="btn btn-primary">📓 Jupyter Notebook</a>
+                                <a href="python_graphs.html" class="btn btn-outline-primary">🌐 HTML Export</a>
+                                <a href="python_graphs.py" class="btn btn-outline-primary">🐍 Python Script</a>
+                            </div>
+
+                            <!-- Python Environment Setup (Collapsible) -->
+                            <div class="accordion accordion-flush" id="pythonSetup">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pythonSetupContent">
+                                            Environment Setup
+                                        </button>
+                                    </h2>
+                                    <div id="pythonSetupContent" class="accordion-collapse collapse" data-bs-parent="#pythonSetup">
+                                        <div class="accordion-body">
+                                            <p>
+                                                <a href="https://www.python.org/" target="_blank">Python 3</a> is required to run this notebook.
+                                                We recommend using <a href="https://docs.python.org/3/library/venv.html" target="_blank">venv</a> to create a virtual environment.
+                                            </p>
+                                            <p>
+                                                This notebook uses <a href="https://seaborn.pydata.org/" target="_blank">Seaborn</a> for visualizations.
+                                                Seaborn provides a simpler interface and more visually appealing default themes.
+                                                It will automatically install pandas, numpy, matplotlib, and other dependencies.
+                                            </p>
+                                            <h6>Create Virtual Environment and Install Dependencies</h6>
+                                            <pre><code>python3 -m venv venv
 source venv/bin/activate
-pip install jupyter seaborn
-</code></pre>
+pip install jupyter seaborn</code></pre>
 
-For the Sankey diagram at the bottom of the notebook, we use <a href="https://plotly.com/python/">Plotly</a>.
-<pre><code>pip install plotly</code></pre>
+                                            <h6 class="mt-3">For Sankey Diagrams</h6>
+                                            <p>The notebook uses <a href="https://plotly.com/python/" target="_blank">Plotly</a> for Sankey diagrams:</p>
+                                            <pre><code>pip install plotly</code></pre>
 
-To run the notebook, start Jupyter from the command line:
-<pre><code>jupyter notebook</code></pre>
+                                            <h6 class="mt-3">Run the Notebook</h6>
+                                            <pre><code>jupyter notebook</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<h2>R</h2>
+                <!-- R Resources Card -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">R Resources</h3>
+                            <p class="card-text">R Markdown notebooks for R-based visualizations.</p>
 
-<a href="R_Graphs.Rmd">R Markdown File</a><br>
-<a href="R_Graphs.html">HTML Export</a><br>
-<h3>Environment Setup</h3>
-<p>
-This notebook requires <a href="https://www.r-project.org/">R</a> and <a href="https://rstudio.com/products/rstudio/download/">RStudio</a>.
-</p>
-<p>You will need to install the necessary R packages to run the notebook.</p>
-<pre><code>install.packages(c("ggplot2", "dplyr", "tidyr", "plotly"))
-</code></pre>
-<p>&nbsp;</p>
-<div class ="centered-div">
-<a href="index.html" role="button" class="btn btn-primary">Support Home</href></a>
+                            <h5 class="mt-3">Materials</h5>
+                            <div class="d-flex gap-2 flex-wrap mb-4">
+                                <a href="R_Graphs.Rmd" class="btn btn-primary">📄 R Markdown</a>
+                                <a href="R_Graphs.html" class="btn btn-outline-primary">🌐 HTML Export</a>
+                            </div>
+
+                            <!-- R Environment Setup (Collapsible) -->
+                            <div class="accordion accordion-flush" id="rSetup">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rSetupContent">
+                                            Environment Setup
+                                        </button>
+                                    </h2>
+                                    <div id="rSetupContent" class="accordion-collapse collapse" data-bs-parent="#rSetup">
+                                        <div class="accordion-body">
+                                            <p>
+                                                This notebook requires <a href="https://www.r-project.org/" target="_blank">R</a>
+                                                and <a href="https://rstudio.com/products/rstudio/download/" target="_blank">RStudio</a>.
+                                            </p>
+                                            <h6>Install Required Packages</h6>
+                                            <pre><code>install.packages(c("ggplot2", "dplyr", "tidyr", "plotly"))</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="text-center my-5">
+                <a href="../../index.html" class="btn btn-primary btn-lg">Back to Home</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 

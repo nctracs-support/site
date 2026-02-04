@@ -27,111 +27,236 @@
   <body>
   <div id="ncstate-utility-bar" data-prop-show-brick="1" data-prop-cse-id="00578865650663686:7xmauxacbr4" ></div>
 <script src="https://cdn.ncsu.edu/brand-assets/utility-bar/v3/ncstate-utility-bar.js"></script>
-<div style="margin:70px 15px 20px 20px;">
-<h1>NC TraCS: Technical Resources</h1>
-This page contains a number of education resources (videos, slides,and Jupyter notebooks) on various parts of the 
-data science lifecycle/process, but geared towards medical research using
-OHDSI's <a href="https://www.ohdsi.org/data-standardization/">OMOP Common Data Model</a>.
+<div class="container-fluid" style="margin:70px 15px 20px 20px;">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <h1 class="mb-4">Technical Tutorials</h1>
+            <p class="lead">
+                Educational resources on data science and statistical concepts for medical research using OHDSI's <a href="https://www.ohdsi.org/data-standardization/">OMOP Common Data Model</a>.
+            </p>
+            <p>
+                If there's a specific topic you would like covered, please submit a <a href="https://docs.google.com/forms/d/e/1FAIpQLSdf7ZYsPn4YMk-KW3AMaq6uMD7SYTtjwWX0OId-2T9qnxbdYg/viewform?usp=header">request</a>.
+            </p>
 
-If there's a specific topic, you would like to covered, please submit a 
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSdf7ZYsPn4YMk-KW3AMaq6uMD7SYTtjwWX0OId-2T9qnxbdYg/viewform?usp=header">request</a>.
+            <!-- Tutorial Cards Grid -->
+            <div class="row g-4 mt-4">
 
+                <!-- Data Science Workflow Card -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Data Science Workflow</h3>
+                            <p class="card-text">Overview of the modeling framework and data science process for clinical research.</p>
+                            <div class="d-flex gap-2 flex-wrap mt-3">
+                                <a href="data_science/ModelingFramework.mp4" class="btn btn-sm btn-outline-primary">📹 Video</a>
+                                <a href="data_science/ModelingFramework.pptx" class="btn btn-sm btn-outline-primary">📊 Slides</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<h2>Data Science Workflow</h2>
-<a href="data_science/ModelingFramework.mp4">Video</a>&nbsp;&nbsp;<a href="data_science/ModelingFramework.pptx">Slides</a> </td>
+                <!-- Exploratory Data Analysis Card -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Exploratory Data Analysis</h3>
+                            <p class="card-text">Comprehensive tutorial on EDA techniques for clinical data with practical examples.</p>
+                            <div class="d-flex gap-2 flex-wrap mt-3">
+                                <a href="eda/EDA_Tutorial.mp4" class="btn btn-sm btn-outline-primary">📹 Video</a>
+                                <a href="eda/EDA_Tutorial.ipynb" class="btn btn-sm btn-outline-primary">📓 Notebook</a>
+                                <a href="eda/EDA_Tutorial.r" class="btn btn-sm btn-outline-primary">📄 R Code</a>
+                                <a href="eda/COVID-19-BMI.csv" class="btn btn-sm btn-outline-secondary">📊 Data</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<h3>Exploratory Data Analysis</h3>
-<a href="eda/EDA_Tutorial.mp4">Video</a>&nbsp;&nbsp;
-                                 <a href="eda/EDA_Tutorial.ipynb">Notebook</a>&nbsp;&nbsp;
-                                 <a href="eda/EDA_Tutorial.r">R Source Code</a>&nbsp;&nbsp;
-                                 <a href="eda/COVID-19-BMI.csv">Data</a> </td>
+                <!-- SQL Tutorials Card -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">SQL Tutorials</h3>
+                            <p class="card-text">Learn SQL fundamentals and advanced queries for working with clinical databases.</p>
+                            <div class="mt-3">
+                                <h6>Introduction to SQL</h6>
+                                <a href="sql/IntroductionToSQL.mp4" class="btn btn-sm btn-outline-primary mb-2">📹 Video</a>
 
-<h3>SQL Tutorials</h3>
-<a href="sql/IntroductionToSQL.mp4">Introduction to SQL</a>&nbsp;&nbsp;
-<a href="sql/Join, Subqueries and CTE.mp4">More Advanced Queuries</a>&nbsp;&nbsp;
-<a href="sql/BasicSQL.txt">Sample SQL</a>&nbsp;&nbsp;
+                                <h6 class="mt-3">Advanced Queries</h6>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <a href="sql/Join, Subqueries and CTE.mp4" class="btn btn-sm btn-outline-primary">📹 Video</a>
+                                    <a href="sql/BasicSQL.txt" class="btn btn-sm btn-outline-primary">📄 Sample SQL</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Statistical Concepts Card - Full Width -->
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Statistical Concepts</h3>
+                            <p class="card-text">
+                                In healthcare and biomedical research, statistical methods are essential for drawing reliable conclusions from data, assessing treatment effectiveness, and making informed clinical decisions. This tutorial series introduces fundamental statistical concepts for conducting research in healthcare.
+                            </p>
 
-<h2>Statistical Concepts</h2>
+                            <!-- Hypothesis Testing Section -->
+                            <div class="mt-4">
+                                <h4>Hypothesis Testing</h4>
+                                <p>
+                                    Hypothesis testing is a statistical method used to evaluate assumptions about a population based on sample data. It plays a crucial role in clinical trials and medical research, such as assessing whether a new treatment provides greater benefits compared to the current standard of care.
+                                </p>
 
-In healthcare and biomedical research, statistical methods are essential for drawing reliable conclusions from data, assessing the effectiveness of treatments, and making informed clinical decisions. From hypothesis testing in clinical trials to evaluating predictive models in diagnostics, a solid understanding of key statistical principles enhances the ability to interpret findings and apply evidence-based practices. This tutorial series introduces fundamental statistical concepts essential for understanding and conducting research in healthcare. 
+                                <div class="row g-3 mt-2">
+                                    <!-- Rejection Region -->
+                                    <div class="col-md-6">
+                                        <div class="border rounded p-3 h-100">
+                                            <h6>Rejection Region</h6>
+                                            <p class="small">Real-world examples guide you through step-by-step calculations and statistical reasoning.</p>
+                                            <div class="d-flex gap-2 flex-wrap">
+                                                <a href="hypothesis/1_1_HT_RejectionRegion.mp4" class="btn btn-sm btn-outline-primary">📹 Video</a>
+                                                <a href="hypothesis/1_1_HT_RejectionRegion.pptx" class="btn btn-sm btn-outline-primary">📊 Slides</a>
+                                                <a href="statistical_concepts/source_code/1_1_HT_RejectionRegion.py" class="btn btn-sm btn-outline-primary">🐍 Python</a>
+                                                <a href="statistical_concepts/source_code/1_1_HT_RejectionRegion.R" class="btn btn-sm btn-outline-primary">📄 R</a>
+                                            </div>
+                                        </div>
+                                    </div>
 
-<h3>Hypothesis Testing</h3>
-Hypothesis testing is a statistical method used to evaluate assumptions about a population based on sample data. It plays a crucial role in clinical trials and medical research. For example, hypothesis testing can be used to assess whether a new treatment provides greater benefits compared to the current standard of care. A hypothesis is a statement about a measurable population parameter, such as the effect of smoking on specific health outcomes. Hypothesis testing can then be used to assess whether the data provides sufficient evidence to reject or not to reject the statement in favor of an alternative idea.
-<p>
-In general, there are two hypotheses: a null hypothesis (H_0) and an alternative hypothesis (H_1 or H_a). The null hypothesis typically represents the assumption that there is no effect or difference. For example, a null hypothesis could be: “There is no difference in health outcomes between smokers and non-smokers.” The alternative hypothesis is typically the opposite– that there is an effect or difference. For example: “Smokers have worse health outcomes compared to non-smokers.”
-<p>
-Our video tutorials present some key concepts in hypothesis testing:
+                                    <!-- Type I and Type II Errors -->
+                                    <div class="col-md-6">
+                                        <div class="border rounded p-3 h-100">
+                                            <h6>Type I and Type II Errors</h6>
+                                            <p class="small">Learn about error types, their meanings, and how they affect statistical decision-making.</p>
+                                            <div class="d-flex gap-2 flex-wrap">
+                                                <a href="hypothesis/1_2_HT_TypeIandIIError.mp4" class="btn btn-sm btn-outline-primary">📹 Video</a>
+                                                <a href="hypothesis/1_2_HT_TypeIandIIError.pptx" class="btn btn-sm btn-outline-primary">📊 Slides</a>
+                                                <a href="statistical_concepts/source_code/1_2_HT_TypeIandIIError.py" class="btn btn-sm btn-outline-primary">🐍 Python</a>
+                                                <a href="statistical_concepts/source_code/1_2_HT_TypeIandIIError.R" class="btn btn-sm btn-outline-primary">📄 R</a>
+                                            </div>
+                                        </div>
+                                    </div>
 
-<h3>Rejection Region</h3>
-Explore key concepts and important information about the Rejection Region in Hypothesis Testing. This tutorial uses real-world examples to guide you through step-by-step calculations and statistical reasoning.<br/>
-<a href="hypothesis/1_1_HT_RejectionRegion.mp4">Video</a>
-&nbsp;&nbsp;<a href="hypothesis/1_1_HT_RejectionRegion.pptx">Slides</a>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/1_1_HT_RejectionRegion.py">Python source code</a>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/1_1_HT_RejectionRegion.R">R source code</a>
+                                    <!-- Power Function -->
+                                    <div class="col-md-6">
+                                        <div class="border rounded p-3 h-100">
+                                            <h6>Power Function</h6>
+                                            <p class="small">Understand the relationship with sample size, significance level, effect size, and Type II errors.</p>
+                                            <div class="d-flex gap-2 flex-wrap">
+                                                <a href="hypothesis/1_3_HT_PowerFunction.mp4" class="btn btn-sm btn-outline-primary">📹 Video</a>
+                                                <a href="hypothesis/1_3_HT_PowerFunction.pptx" class="btn btn-sm btn-outline-primary">📊 Slides</a>
+                                                <a href="statistical_concepts/source_code/1_3_HT_PowerFunction.py" class="btn btn-sm btn-outline-primary">🐍 Python</a>
+                                                <a href="statistical_concepts/source_code/1_3_HT_PowerFunction.R" class="btn btn-sm btn-outline-primary">📄 R</a>
+                                            </div>
+                                        </div>
+                                    </div>
 
-<h3>Type I and Type II Errors</h3>
-Learn about Type I and Type II errors in hypothesis testing, including their meanings, implications, and how they affect statistical decision-making.<br/>
-<a href="hypothesis/1_2_HT_TypeIandIIError.mp4">Video</a>&nbsp;&nbsp;<a href="hypothesis/1_2_HT_TypeIandIIError.pptx">Slides</a>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/1_2_HT_TypeIandIIError.py">Python source code</a>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/1_2_HT_TypeIandIIError.R">R source code</a>
-<br>
+                                    <!-- Significance Level -->
+                                    <div class="col-md-6">
+                                        <div class="border rounded p-3 h-100">
+                                            <h6>Significance Level</h6>
+                                            <p class="small">Learn about alpha's role in defining the rejection region and its impact on errors.</p>
+                                            <div class="d-flex gap-2 flex-wrap">
+                                                <a href="hypothesis/1_4_HT_SignificanceLevel.mp4" class="btn btn-sm btn-outline-primary">📹 Video</a>
+                                                <a href="hypothesis/1_4_HT_SignificanceLevel.pptx" class="btn btn-sm btn-outline-primary">📊 Slides</a>
+                                            </div>
+                                        </div>
+                                    </div>
 
-<h3>Power Function</h3>
-Understand the power function in hypothesis testing and its relationship with sample size, significance level, effect size, and Type II errors. 
-<br/>
-<a href="hypothesis/1_3_HT_PowerFunction.mp4">Video</a>&nbsp;&nbsp;<a href="hypothesis/1_3_HT_PowerFunction.pptx">Slides</a>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/1_3_HT_PowerFunction.py">Python source code</a>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/1_3_HT_PowerFunction.R">R source code</a>
-<br>
+                                    <!-- P-values -->
+                                    <div class="col-md-6">
+                                        <div class="border rounded p-3 h-100">
+                                            <h6>P-values</h6>
+                                            <p class="small">How P-values help determine statistical significance and their relationship with rejection regions.</p>
+                                            <div class="d-flex gap-2 flex-wrap">
+                                                <a href="hypothesis/1_5_HT_PValue.mp4" class="btn btn-sm btn-outline-primary">📹 Video</a>
+                                                <a href="hypothesis/1_5_HT_PValue.pptx" class="btn btn-sm btn-outline-primary">📊 Slides</a>
+                                                <a href="statistical_concepts/source_code/1_5_HT_PValue.py" class="btn btn-sm btn-outline-primary">🐍 Python</a>
+                                                <a href="statistical_concepts/source_code/1_5_HT_PValue.R" class="btn btn-sm btn-outline-primary">📄 R</a>
+                                            </div>
+                                        </div>
+                                    </div>
 
-<h3>Significance Level</h3>
-Learn about the significance level (alpha) in hypothesis testing, its role in defining the rejection region, and its impact on Type I and Type II errors. 
-<br/>
-<a href="hypothesis/1_4_HT_SignificanceLevel.mp4">Video</a>&nbsp;&nbsp;<a href="hypothesis/1_4_HT_SignificanceLevel.pptx">Slides</a>
+                                    <!-- Confidence and Prediction Intervals -->
+                                    <div class="col-md-6">
+                                        <div class="border rounded p-3 h-100">
+                                            <h6>Confidence and Prediction Intervals</h6>
+                                            <p class="small">Quantify uncertainty around point estimates in medical research.</p>
+                                            <div class="d-flex gap-2 flex-wrap">
+                                                <a href="statistical_concepts/source_code/2_1_CIPI.py" class="btn btn-sm btn-outline-primary">🐍 Python</a>
+                                                <a href="statistical_concepts/source_code/2_1_CIPI.R" class="btn btn-sm btn-outline-primary">📄 R</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-<h3>P-values</h3>
-Learn about the P-value in hypothesis testing, how it helps determine statistical significance, and its relationship with the rejection region and significance level.</br>
-<a href="hypothesis/1_5_HT_PValue.mp4">Video</a>&nbsp;&nbsp;<a href="hypothesis/1_5_HT_PValue.pptx">Slides</a>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/1_5_HT_PValue.py">Python source code</a>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/1_5_HT_PValue.R">R source code</a>
+                            <!-- Model Evaluation Section -->
+                            <div class="mt-4">
+                                <h4>Model Evaluation</h4>
+                                <p>Essential metrics for evaluating predictive models in healthcare analytics.</p>
 
-<h3>Confidence and Prediction Intervals</h3>
-In medical (or any) research, it is important to quantify the uncertainty around a point estimate. Confidence and prediction intervals are statistical tools for this purpose.
-<br/>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/2_1_CIPI.py">Python source code</a>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/2_1_CIPI.R">R source code</a>
+                                <div class="row g-3 mt-2">
+                                    <!-- Bias and Variance -->
+                                    <div class="col-md-6">
+                                        <div class="border rounded p-3 h-100">
+                                            <h6>Bias and Variance</h6>
+                                            <p class="small">Explore bias-variance tradeoffs in statistical inference and predictive accuracy.</p>
+                                            <div class="d-flex gap-2 flex-wrap">
+                                                <a href="statistical_concepts/bias_variance/3_1_BiasVariance.mp4" class="btn btn-sm btn-outline-primary">📹 Video</a>
+                                                <a href="statistical_concepts/bias_variance/3_1_BiasVariance.pptx" class="btn btn-sm btn-outline-primary">📊 Slides</a>
+                                                <a href="statistical_concepts/bias_variance/3_1_BiasVariance.R" class="btn btn-sm btn-outline-primary">📄 R</a>
+                                                <a href="statistical_concepts/bias_variance/3_1_test_data.csv" class="btn btn-sm btn-outline-secondary">📊 Test Data</a>
+                                                <a href="statistical_concepts/bias_variance/3_1_train_data.csv" class="btn btn-sm btn-outline-secondary">📊 Train Data</a>
+                                            </div>
+                                        </div>
+                                    </div>
 
-<h3>Bias and Variance</h3>
-Explore bias and variance in statistical inference and their trade-offs in predictive accuracy.
-<br/>
-<a href="statistical_concepts/bias_variance/3_1_BiasVariance.mp4">Video</a>
-&nbsp;&nbsp;<a href="statistical_concepts/bias_variance/3_1_BiasVariance.pptx">Slides</a>
-&nbsp;&nbsp;<a href="statistical_concepts/bias_variance/3_1_BiasVariance.R">R source code</a>
-&nbsp;&nbsp;<a href="statistical_concepts/bias_variance/3_1_test_data.csv">Test Data</a>
-&nbsp;&nbsp;<a href="statistical_concepts/bias_variance/3_1_train_data.csv">Train Data</a>
+                                    <!-- ROC Curves -->
+                                    <div class="col-md-6">
+                                        <div class="border rounded p-3 h-100">
+                                            <h6>ROC Curves and AUC</h6>
+                                            <p class="small">Measure model ability to distinguish between positive and negative cases across classification thresholds.</p>
+                                            <div class="d-flex gap-2 flex-wrap">
+                                                <a href="statistical_concepts/roc/3_1_ROCAUC.mp4" class="btn btn-sm btn-outline-primary">📹 Video</a>
+                                                <a href="statistical_concepts/roc/3_1_ROCAUC.pptx" class="btn btn-sm btn-outline-primary">📊 Slides</a>
+                                                <a href="statistical_concepts/roc/3_2_ROCAUC.R" class="btn btn-sm btn-outline-primary">📄 R</a>
+                                            </div>
+                                        </div>
+                                    </div>
 
-<h3>ROC Curves</h3>
-In healthcare analytics, predictive models are used for tasks such as diagnosing diseases or predicting patient outcomes. It is critical to evaluate how well these models perform using appropriate metrics. Some commonly used evaluation metrics include ROC Curves (Receiver Operating Characteristic) and the AUC (Area Under the Curve), which measure the model’s ability to distinguish between positive and negative cases across various classification thresholds. Additionally, Precision, Recall, and the F1 Score are used to assess classification performance, highlighting the model’s ability to balance identifying true positives while minimizing false results. 
-<br/>
-<a href="statistical_concepts/roc/3_1_ROCAUC.mp4">Video</a>
-&nbsp;&nbsp;<a href="statistical_concepts/roc/3_1_ROCAUC.pptx">Slides</a>
-&nbsp;&nbsp;<a href="statistical_concepts/roc/3_2_ROCAUC.R">R source code</a>
+                                    <!-- R-Squared -->
+                                    <div class="col-md-6">
+                                        <div class="border rounded p-3 h-100">
+                                            <h6>R-Squared and Adjusted R-Squared</h6>
+                                            <p class="small">Understand model fit without overfitting or underfitting, including bias-variance tradeoff.</p>
+                                            <div class="d-flex gap-2 flex-wrap">
+                                                <a href="statistical_concepts/2_2_R2.mp4" class="btn btn-sm btn-outline-primary">📹 Video</a>
+                                                <a href="statistical_concepts/2_2_R2.pptx" class="btn btn-sm btn-outline-primary">📊 Slides</a>
+                                                <a href="statistical_concepts/source_code/2_2_R2.py" class="btn btn-sm btn-outline-primary">🐍 Python</a>
+                                                <a href="statistical_concepts/source_code/2_2_R2.R" class="btn btn-sm btn-outline-primary">📄 R</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<h3>R-Squared and Adjusted R-Squared</h3>
-When building predictive models for healthcare data, it is crucial to understand how well the model represents the data without overfitting or underfitting. We introduce the concepts of R-Squared and Adjusted R-Squared, and discuss bias-variance tradeoff here.
-<br/>
-<a href="statistical_concepts/2_2_R2.mp4">Video</a>&nbsp;&nbsp;<a href="statistical_concepts/2_2_R2.pptx">Slides</a>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/2_2_R2.py">Python source code</a>
-&nbsp;&nbsp;<a href="statistical_concepts/source_code/2_2_R2.R">R source code</a>
+            </div>
 
+            <!-- Back Button and Note -->
+            <div class="text-center my-5">
+                <a href="index.html" class="btn btn-primary btn-lg">Back to Home</a>
+            </div>
 
-<div class ="centered-div">
-<a href="index.html" role="button" class="btn btn-primary">Support Home</href></a>
+            <div class="alert alert-info" role="alert">
+                <em>Note:</em> All provided data is synthetic - no real patient data is available on this page.
+            </div>
+
+        </div>
+    </div>
 </div>
-
-<hr>
-<em>Note:</em> All provided data is synthetic - no real patient data is available on this page.
 
 </div>        
     <!-- Bootstrap 5 JavaScript Bundle (includes Popper) -->

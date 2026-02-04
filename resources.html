@@ -21,69 +21,165 @@
   <body>
   <div id="ncstate-utility-bar" data-prop-show-brick="1" data-prop-cse-id="00578865650663686:7xmauxacbr4" ></div>
 <script src="https://cdn.ncsu.edu/brand-assets/utility-bar/v3/ncstate-utility-bar.js"></script>
-<div style="margin:70px 15px 20px 20px;">
-<h2> Comprehensive Resource Guide for Clinical Researchers Utilizing the OMOP Common Data Model</h2>
-The Observational Health Data Sciences and Informatics (OHDSI) initiative and its OMOP Common Data Model (CDM) have revolutionized collaborative clinical research by standardizing heterogeneous healthcare data into a unified framework. This report synthesizes critical resources&mdash;including tools, publications, training materials, and community platforms&mdash;to empower researchers navigating OMOP-based studies.
-<h3>Foundational Resources for OMOP CDM Implementation </h3>
-<h4>Standardized Data Model Documentation</h4>
-The <strong><a href='https://www.ohdsi.org/data-standardization/'>OMOP CDM specification</a></strong>, maintained by the OHDSI community, defines the structure, conventions, and vocabulary requirements for transforming raw healthcare data into the OMOP format. The official GitHub repository provides Data Definition Language (DDL) scripts for creating OMOP-compliant tables across database platforms like PostgreSQL, RedShift, and SQL Server. The OHDSI website further elaborates on the model&rsquo;s design philosophy, emphasizing its role in enabling reproducible analytics across disparate datasets.
-<p>
-OHDSI GitHub: <a href="https://github.com/OHDSI/CommonDataModel">https://github.com/OHDSI/CommonDataModel</a><br>
-OMOP Introduction: <a href="https://health.ucdavis.edu/data/omop.html">https://health.ucdavis.edu/data/omop.html</a>
+<div class="container-fluid" style="margin:70px 15px 20px 20px;">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <h1 class="mb-4">OMOP Common Data Model Resources</h1>
+            <p class="lead">
+                A comprehensive guide for clinical researchers utilizing the OHDSI initiative and OMOP Common Data Model (CDM) for standardized healthcare data analysis.
+            </p>
 
-<h4>Vocabulary Harmonization Tools</h4>
-The OHDSI Standardized Vocabularies map diverse coding systems (e.g., SNOMED-CT, ICD-10, RxNorm) to OMOP concepts, ensuring semantic interoperability. Researchers access these vocabularies via the Athena portal, which supports concept browsing, mapping validation, and download. For genomic data integration, the KOIOS tool harmonizes variant call formats (VCFs) with OMOP genomic concepts, automating HGVSg identifier generation and concept ID assignment.
-<p>
-Athena Website: <a href="https://athena.ohdsi.org/">https://athena.ohdsi.org/</a><br>
-KOIOS: <a href="https://github.com/OHDSI/Koios">https://github.com/OHDSI/Koios</a>
+            <!-- Resource Cards Grid -->
+            <div class="row g-4 mt-4">
 
-<h3>Analytical Tools and Software Ecosystem</h3>
-<h4>Cohort Development and Patient-Level Prediction </h4>
-ATLAS, OHDSI&rsquo;s flagship web application, enables cohort definition through intuitive concept searches and temporal criteria. Its Patient-Level Prediction (PLP) module integrates machine learning models for risk stratification, leveraging R packages like 
-PatientLevelPrediction
-and 
-DeepPatientLevelPrediction. 
-Comparative studies validate ATLAS&rsquo;s feasibility against custom R workflows, particularly for logistic regression and tree-based models. For advanced users, the 
-Gaia
-toolchain incorporates geospatial determinants of health into OMOP analyses via 
-gaiaDB
-(geospatial staging database) and 
-gaiaCore
-(R package).
-<p>
-ATLAS Website: <a href="https://github.com/OHDSI/Atlas">https://github.com/OHDSI/Atlas</a><br>
-Gaia: <a href="https://github.com/OHDSI/GIS">https://github.com/OHDSI/GIS</a>
+                <!-- Foundational Resources Card -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Foundational Resources</h3>
 
-<h4>Data Quality Assessment</h4>
-The  Data Quality Dashboard (DQD) evaluates OMOP datasets against 3,300+ predefined checks, categorizing issues using the Kahn Framework (completeness, plausibility, conformance). Complementing this,  CohortDiagnostics  identifies inconsistencies in cohort definitions across institutions, critical for multicenter studies. A <a href="https://www.ohdsi.org/wp-content/uploads/2024/10/49-Lee-Comparative-Analysis-of-OMOP-CDM-Database-Profiles-Across-Institutions-and-Future-Research-Implications_Abstract-hlee-hlee.pdf">2025 comparative analysis of Johns Hopkins and Washington University datasets</a> demonstrated how these tools uncover variability in measurement vocabularies and demographic completeness. 
-<p>
-Data Quality Dashboard:  <a href="https://github.com/OHDSI/DataQualityDashboard">https://github.com/OHDSI/DataQualityDashboard</a><br>
-Cohort Diagnostics:  <a href="https://github.com/OHDSI">https://github.com/OHDSI</a> 
+                            <h5 class="mt-4">Data Model Documentation</h5>
+                            <p class="card-text">
+                                The OMOP CDM specification defines the structure, conventions, and vocabulary requirements for transforming raw healthcare data into the OMOP format.
+                            </p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">
+                                    <a href="https://www.ohdsi.org/data-standardization/" target="_blank">OMOP CDM Specification</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://github.com/OHDSI/CommonDataModel" target="_blank">OHDSI GitHub Repository</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://health.ucdavis.edu/data/omop.html" target="_blank">OMOP Introduction</a>
+                                </li>
+                            </ul>
 
+                            <h5 class="mt-4">Vocabulary Tools</h5>
+                            <p class="card-text">
+                                Standardized vocabularies map diverse coding systems (SNOMED-CT, ICD-10, RxNorm) to OMOP concepts.
+                            </p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a href="https://athena.ohdsi.org/" target="_blank">Athena Portal</a> - Concept browsing and mapping
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://github.com/OHDSI/Koios" target="_blank">KOIOS</a> - Genomic data integration tool
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-<h3>Training and Community Support</h3>
-<h4>Educational Platforms</h4>
-The OHDSI Symposium annually features workshops on OMOP CDM ETL processes, ATLAS analytics, and predictive modeling. Recordings and slides are archived on the OHDSI YouTube channel. Institutional training programs, like UF Health&rsquo;s  ATLAS Tutorials <span>, provide step-by-step guides for cohort creation and vocabulary searches. For self-paced learning, The Book of OHDSI  offers chapters on CDM design, standardized analytics, and ethical considerations.
-<p>
-Book of OHDSI: <a href="https://ohdsi.github.io/TheBookOfOhdsi/">https://ohdsi.github.io/TheBookOfOhdsi/</a><br>
-EHDEN Academy: <a href="https://academy.ehden.eu/course/view.php?id%3D4">https://academy.ehden.eu/course/view.php?id=4</a><br>
-OHDSI Youtube Channel: <a href="https://www.youtube.com/@OHDSI">https://www.youtube.com/@OHDSI</a><br>
-StanfordSTARR: <a href="https://www.youtube.com/@stanfordstarr8476">https://www.youtube.com/@stanfordstarr8476</a><br>
-UF Health&#39;s ATLAS Tutorial: <a href="https://idr.ufhealth.org/research-services/feasibility-cohort-discovery/uf-health-omop-atlas-training-tools/">https://idr.ufhealth.org/research-services/feasibility-cohort-discovery/uf-health-omop-atlas-training-tools/</a>
+                <!-- Analytical Tools Card -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Analytical Tools</h3>
 
-<h4>Collaborative Forums</h4>
-The OHDSI Forum hosts active discussions on technical challenges, such as medical image data integration and vocabulary mapping ambiguities. Researchers troubleshoot ETL pipelines, share optimization strategies, and propose CDM extensions. The  OHDSI GitHub Organization (321+ repositories) fosters open-source collaboration, with repositories like CommonDataModel and FeatureExtraction enabling version-controlled contributions
-<p>
-OHDSI Forum:  <a href="https://forums.ohdsi.org/t/help-with-omop-cdm-setup-medical-images-extension/20746&amp;sa=D&amp;source=editors&amp;ust=1741181747850881&amp;usg=AOvVaw1sdvIaSwTS2zI-E7-3Pp63">https://forums.ohdsi.org/t/help-with-omop-cdm-setup-medical-images-extension/20746</a> 
+                            <h5 class="mt-4">Cohort Development</h5>
+                            <p class="card-text">
+                                ATLAS enables cohort definition through intuitive concept searches and temporal criteria, with machine learning integration for risk stratification.
+                            </p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">
+                                    <a href="https://github.com/OHDSI/Atlas" target="_blank">ATLAS</a> - Flagship cohort development platform
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://github.com/OHDSI/GIS" target="_blank">Gaia Toolchain</a> - Geospatial health determinants
+                                </li>
+                            </ul>
 
-<h4>Synthetic and Real-World Data Sources</h4>
-The  CMS SynPUF dataset, a synthetic Medicare beneficiary sample, allows method validation without privacy constraints. Institutions like URMC and UC Davis Health provide de-identified OMOP datasets spanning millions of patients, accessible via IRB-approved requests. The  OHDSI Network Research Initiative  facilitates federated analyses across 20+ global sites, supporting studies on drug safety, COVID-19 outcomes, and health equity.
-<p>
-CMS SynPUF:  <a href="https://health.ucdavis.edu/data/omop.html">https://health.ucdavis.edu/data/omop.html</a><br>
-OHDSI Network Research Initiative:  <a href="https://www.ohdsi.org/network-research-studies/"">https://www.ohdsi.org/network-research-studies/</a> 
-<p>&nbsp;</p>
-<div class ="centered-div">
-<a href="index.html" role="button" class="btn btn-primary">Support Home</href></a>
+                            <h5 class="mt-4">Data Quality</h5>
+                            <p class="card-text">
+                                Comprehensive tools for evaluating OMOP datasets against 3,300+ predefined checks.
+                            </p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a href="https://github.com/OHDSI/DataQualityDashboard" target="_blank">Data Quality Dashboard</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://github.com/OHDSI" target="_blank">CohortDiagnostics</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training & Education Card -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Training & Education</h3>
+
+                            <h5 class="mt-4">Learning Resources</h5>
+                            <p class="card-text">
+                                Comprehensive training materials, workshops, and self-paced learning resources for OMOP CDM and ATLAS analytics.
+                            </p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a href="https://ohdsi.github.io/TheBookOfOhdsi/" target="_blank">The Book of OHDSI</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://academy.ehden.eu/course/view.php?id=4" target="_blank">EHDEN Academy</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.youtube.com/@OHDSI" target="_blank">OHDSI YouTube Channel</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.youtube.com/@stanfordstarr8476" target="_blank">Stanford STARR</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://idr.ufhealth.org/research-services/feasibility-cohort-discovery/uf-health-omop-atlas-training-tools/" target="_blank">UF Health ATLAS Tutorials</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community & Data Sources Card -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Community & Data</h3>
+
+                            <h5 class="mt-4">Collaborative Forums</h5>
+                            <p class="card-text">
+                                Active community discussions on technical challenges, ETL pipelines, and CDM extensions.
+                            </p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">
+                                    <a href="https://forums.ohdsi.org/" target="_blank">OHDSI Forum</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://github.com/OHDSI" target="_blank">OHDSI GitHub</a> - 321+ repositories
+                                </li>
+                            </ul>
+
+                            <h5 class="mt-4">Data Sources</h5>
+                            <p class="card-text">
+                                Synthetic and real-world OMOP datasets for research and validation.
+                            </p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a href="https://health.ucdavis.edu/data/omop.html" target="_blank">CMS SynPUF Dataset</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.ohdsi.org/network-research-studies/" target="_blank">OHDSI Network Research Initiative</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Back Button -->
+            <div class="text-center my-5">
+                <a href="index.html" class="btn btn-primary btn-lg">Back to Home</a>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 
