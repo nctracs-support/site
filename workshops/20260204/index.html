@@ -114,6 +114,46 @@ pip install jupyter pandas numpy matplotlib seaborn</code></pre>
                         </div>
                     </div>
                 </div>
+
+                <!-- R Version Card -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">R Version</h3>
+                            <p class="card-text">Workshop materials for R users.</p>
+
+                            <h5 class="mt-3">Materials</h5>
+                            <div class="d-flex gap-2 flex-wrap mb-4">
+                                <a href="R/RCode.html" class="btn btn-primary">📊 R Code (HTML)</a>
+                                <a href="R/RCode.Rmd" class="btn btn-outline-primary">📝 R Markdown Source</a>
+                            </div>
+
+                            <!-- R Environment Setup (Collapsible) -->
+                            <div class="accordion accordion-flush" id="rSetup">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rSetupContent">
+                                            Environment Setup
+                                        </button>
+                                    </h2>
+                                    <div id="rSetupContent" class="accordion-collapse collapse" data-bs-parent="#rSetup">
+                                        <div class="accordion-body">
+                                            <p>
+                                                <a href="https://www.r-project.org/" target="_blank">R</a> and
+                                                <a href="https://rstudio.com/" target="_blank">RStudio</a> are recommended for working with R Markdown files.
+                                            </p>
+                                            <h6>Install Required Packages</h6>
+                                            <pre><code>install.packages(c("tidyverse", "ggplot2", "dplyr"))</code></pre>
+
+                                            <h6 class="mt-3">Open R Markdown File</h6>
+                                            <p>Open <code>RCode.Rmd</code> in RStudio and click "Knit" to render the document.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Back Button -->
