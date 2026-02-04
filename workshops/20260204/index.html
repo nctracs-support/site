@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- NC State Theme -->
+    <link rel="stylesheet" href="../../ncstate-theme.css">
+
+<link rel="icon" type="image/x-icon" href="https://cdn.ncsu.edu/brand-assets/favicons/favicon.ico" sizes="any">
+<link rel="icon" href="https://cdn.ncsu.edu/brand-assets/favicons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="https://cdn.ncsu.edu/brand-assets/favicons/apple-touch-icon.png">
+<link rel="manifest" href="https://cdn.ncsu.edu/brand-assets/favicons/manifest.webmanifest">
+
+    <title>NC TraCS: Exploratory Data Analysis Workshop</title>
+  </head>
+  <body>
+  <div id="ncstate-utility-bar" data-prop-show-brick="1" data-prop-cse-id="00578865650663686:7xmauxacbr4" ></div>
+<script src="https://cdn.ncsu.edu/brand-assets/utility-bar/v3/ncstate-utility-bar.js"></script>
+<div class="container-fluid" style="margin:70px 15px 20px 20px;">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <h1 class="mb-4">Exploratory Data Analysis Workshop</h1>
+            <p class="lead">
+                Workshop materials for learning exploratory data analysis techniques using Python and Jupyter notebooks.
+            </p>
+
+            <!-- Workshop Materials Card -->
+            <div class="row g-4 mt-4">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Workshop Materials</h3>
+                            <p class="card-text">Download slides and sample data for this workshop.</p>
+
+                            <h5 class="mt-3">Slides</h5>
+                            <div class="d-flex gap-2 flex-wrap mb-4">
+                                <a href="20260204-slides.pptx" class="btn btn-primary">📊 PowerPoint</a>
+                                <a href="20260204-slides.pdf" class="btn btn-primary">📄 PDF</a>
+                            </div>
+
+                            <h5>Sample Dataset</h5>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="data.csv" class="btn btn-outline-primary">📊 data.csv</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise Notebook Card -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Workshop Exercises</h3>
+                            <p class="card-text">Hands-on exercises for learning exploratory data analysis techniques.</p>
+
+                            <h5 class="mt-3">Materials</h5>
+                            <div class="d-flex gap-2 flex-wrap mb-4">
+                                <a href="eda_workshop_exercises.ipynb" class="btn btn-primary">📓 Exercise Notebook</a>
+                            </div>
+
+                            <!-- Python Environment Setup (Collapsible) -->
+                            <div class="accordion accordion-flush" id="pythonSetup">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pythonSetupContent">
+                                            Environment Setup
+                                        </button>
+                                    </h2>
+                                    <div id="pythonSetupContent" class="accordion-collapse collapse" data-bs-parent="#pythonSetup">
+                                        <div class="accordion-body">
+                                            <p>
+                                                <a href="https://www.python.org/" target="_blank">Python 3</a> is required to run this notebook.
+                                                We recommend using <a href="https://docs.python.org/3/library/venv.html" target="_blank">venv</a> to create a virtual environment.
+                                            </p>
+                                            <p>
+                                                This notebook uses common data analysis libraries including pandas, numpy, matplotlib, and seaborn.
+                                            </p>
+                                            <h6>Create Virtual Environment and Install Dependencies</h6>
+                                            <pre><code>python3 -m venv venv
+source venv/bin/activate
+pip install jupyter pandas numpy matplotlib seaborn</code></pre>
+
+                                            <h6 class="mt-3">Run the Notebook</h6>
+                                            <pre><code>jupyter notebook</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructor Notebook Card -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Instructor Version</h3>
+                            <p class="card-text">Complete notebook with solutions for instructors.</p>
+
+                            <h5 class="mt-3">Materials</h5>
+                            <div class="d-flex gap-2 flex-wrap mb-4">
+                                <a href="eda_workshop_exercises_instructor.ipynb" class="btn btn-primary">📓 Instructor Notebook</a>
+                            </div>
+
+                            <!-- Note for Instructors -->
+                            <div class="alert alert-info mt-3" role="alert">
+                                <strong>Note:</strong> This version includes complete solutions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="text-center my-5">
+                <a href="../../index.html" class="btn btn-primary btn-lg">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>        
+    <!-- Bootstrap 5 JavaScript Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
