@@ -5,22 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.ncsu.edu/brand-assets/bootstrap-4/css/bootstrap.min.css">
-    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- NC State Theme -->
+    <link rel="stylesheet" href="ncstate-theme.css">
+
 <link rel="icon" type="image/x-icon" href="https://cdn.ncsu.edu/brand-assets/favicons/favicon.ico" sizes="any">
 <link rel="icon" href="https://cdn.ncsu.edu/brand-assets/favicons/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="https://cdn.ncsu.edu/brand-assets/favicons/apple-touch-icon.png">
 <link rel="manifest" href="https://cdn.ncsu.edu/brand-assets/favicons/manifest.webmanifest">
 
     <title> NC TraCS EHR Data Support Team</title>
-    <style>
-        .centered-div {
-            width: 80%;
-            text-align: center; /* This centers the content inside the div */
-            margin: 50px 20px 50px 20px;
-        }
-    </style>
     <script>
         // Function to navigate to a URL
         function goToUrl(url) {
@@ -35,38 +31,67 @@
     <h1> NC TraCS EHR Data Support Team</h1>
     <b>A project of the NC State Data Science and AI Academy</b><br>
     <b>In partnership with the  <a href="https://tracs.unc.edu/">NC Translational and Clinical Sciences (NC TraCS) Institute</a></b>
-    <p style="margin-top:20px">
-    <a href="workshops/20251105/index.html">Clinical Data Visualization in R and Python Workshop</a>
+    <p style="margin-top:30px">
+    <a href='https://tracs.unc.edu/'>NC TraCS</a> has partnered with the
+    <a href="https://datascienceacademy.ncsu.edu/">NC State Data Science and AI Academy</a>
+    to provide timely and targeted support to clinical researchers using electronic health record (EHR) data.
     </p>
-    <p style="margin-top:10px">
-    <video width="80%" controls poster="videos/welcome.png">
-        <source src="videos/IntroAndWelcome.mp4" type="video/mp4" />
-          <track label="English" kind="captions" srclang="en" src="videos/transcript.vtt" default />
-        Your browser does not support the video tag.
-    </video>
-    <p>
-    <a href='https://tracs.unc.edu/'>NC TraCS</a> has partnered with the 
-    <a href="https://datascienceacademy.ncsu.edu/">NC State Data Science and AI Academy</a> 
-    to provide  timely and target support to clinical researchers using electronic health record (EHR) data.
 
-     We engage with the entire data lifecycle, but focus on processing, management, analysis, visualization, and interpretation.
-    <img src="lifecycle.png" width="80%" height="auto" 
+    <!-- Four Main Areas -->
+    <div class="row g-4 my-4">
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 text-center shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Clinical Data Visualization Workshop</h5>
+                    <p class="card-text flex-grow-1">Learn to create effective visualizations with R and Python</p>
+                    <a href="workshops/20251105/index.html" class="btn btn-primary mt-auto">View Workshop</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 text-center shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Exploratory Data Analysis Workshop</h5>
+                    <p class="card-text flex-grow-1">Master EDA techniques for clinical research data</p>
+                    <a href="eda/EDA_Tutorial.ipynb" class="btn btn-primary mt-auto">View Workshop</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 text-center shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Tutorials</h5>
+                    <p class="card-text flex-grow-1">Step-by-step guides for working with EHR data</p>
+                    <a href="tutorials.html" class="btn btn-primary mt-auto">Browse Tutorials</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 text-center shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Resources</h5>
+                    <p class="card-text flex-grow-1">Comprehensive guide for OMOP and clinical research</p>
+                    <a href="resources.html" class="btn btn-primary mt-auto">View Resources</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>
+    We engage with the entire data lifecycle, but focus on processing, management, analysis, visualization, and interpretation.
+    </p>
+    <img src="lifecycle.png" width="80%" height="auto"
          title="Data Analysis Lifecycle"
          alt="lifecycle process diagram: generation, collection, processing, storage, management, analysis, visualization, and interpretation" />
-    <p>
+    <p style="margin-top:20px">
     If you have a specific question, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfMQGCQtg0p8gk2t1lkefRuXnnImP1FLE3_Gm_H8L6TVrQ7pA/viewform?usp=sharing'">
     contact us</a> through our Google form. You will receive a reply to your request within three business days.
-
-    We have also developed various <a href="tutorials.html">tutorials</a> to help you work with EHR data. All of our guides use synthetic data that is very similar to real EHR data. 
-    If you have ideas for new tutorials or content, please let us know via our 
+    </p>
+    <p>
+    We have also developed various <a href="tutorials.html">tutorials</a> to help you work with EHR data. All of our guides use synthetic data that is very similar to real EHR data.
+    If you have ideas for new tutorials or content, please let us know via our
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfMQGCQtg0p8gk2t1lkefRuXnnImP1FLE3_Gm_H8L6TVrQ7pA/viewform?usp=sharing'">request form</a>.
-
-
-<div class ="centered-div">
-<a href='https://docs.google.com/forms/d/e/1FAIpQLSfMQGCQtg0p8gk2t1lkefRuXnnImP1FLE3_Gm_H8L6TVrQ7pA/viewform?usp=sharing')" role="button" class="btn btn-primary" >Request Assistance</a>
-&nbsp;&nbsp;<a href='tutorials.html' role="button" class="btn btn-primary">Tutorials</a>
-&nbsp;&nbsp;<a href='resources.html' role="button" class="btn btn-primary">Resources</a>
-</div>
+    </p>
 
 
 <hr>
@@ -75,10 +100,7 @@ which is supported by the National Center for Advancing Translational Sciences (
 The content is solely the responsibility of the authors and does not necessarily represent the official views of the NIH.
 
 </div>  
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://cdn.ncsu.edu/brand-assets/bootstrap-4/js/bootstrap.min.js"></script>
+    <!-- Bootstrap 5 JavaScript Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

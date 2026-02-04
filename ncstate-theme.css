@@ -1,0 +1,191 @@
+/**
+ * NC State University Theme for Bootstrap 5
+ * Implements NC State brand guidelines with modern CSS custom properties
+ */
+
+:root {
+  /* NC State Brand Colors */
+  --ncstate-red: #CC0000;
+  --ncstate-red-dark: #990000;
+  --ncstate-black: #000000;
+  --ncstate-gray-dark: #333333;
+  --ncstate-gray: #666666;
+  --ncstate-gray-light: #CCCCCC;
+  --ncstate-white: #FFFFFF;
+
+  /* Accent Colors */
+  --ncstate-blue: #427e93;
+  --ncstate-green: #6F7D1C;
+
+  /* Typography - Fluid Responsive Scaling */
+  --font-size-base: clamp(1rem, 0.298vw + 0.857rem, 1.125rem);
+  --font-size-h1: clamp(2.5rem, 1.5vw + 2rem, 3.5rem);
+  --font-size-h2: clamp(2rem, 1.2vw + 1.6rem, 2.75rem);
+  --font-size-h3: clamp(1.75rem, 1vw + 1.4rem, 2.25rem);
+  --font-size-h4: clamp(1.5rem, 0.8vw + 1.2rem, 2rem);
+  --font-size-h5: clamp(1.25rem, 0.6vw + 1rem, 1.75rem);
+  --font-size-h6: clamp(1.125rem, 0.4vw + 0.9rem, 1.5rem);
+
+  /* Override Bootstrap primary color */
+  --bs-primary: var(--ncstate-red);
+  --bs-primary-rgb: 204, 0, 0;
+  --bs-link-color: var(--ncstate-red);
+  --bs-link-hover-color: var(--ncstate-red-dark);
+}
+
+/* Body and Base Typography */
+body {
+  font-size: var(--font-size-base);
+  color: var(--ncstate-gray-dark);
+  line-height: 1.6;
+}
+
+/* Headings */
+h1, .h1 {
+  font-size: var(--font-size-h1);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--ncstate-black);
+  margin-bottom: 1.5rem;
+}
+
+h2, .h2 {
+  font-size: var(--font-size-h2);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--ncstate-black);
+  margin-bottom: 1.25rem;
+}
+
+h3, .h3 {
+  font-size: var(--font-size-h3);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--ncstate-gray-dark);
+  margin-bottom: 1rem;
+}
+
+h4, .h4 {
+  font-size: var(--font-size-h4);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--ncstate-gray-dark);
+}
+
+h5, .h5 {
+  font-size: var(--font-size-h5);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--ncstate-gray-dark);
+}
+
+h6, .h6 {
+  font-size: var(--font-size-h6);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--ncstate-gray-dark);
+}
+
+/* Links */
+a {
+  color: var(--ncstate-red);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--ncstate-red-dark);
+  text-decoration: underline;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--ncstate-red);
+  border-color: var(--ncstate-red);
+  color: var(--ncstate-white);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--ncstate-red-dark);
+  border-color: var(--ncstate-red-dark);
+  color: var(--ncstate-white);
+}
+
+.btn-primary:active {
+  background-color: var(--ncstate-red-dark) !important;
+  border-color: var(--ncstate-red-dark) !important;
+}
+
+.btn-secondary {
+  background-color: var(--ncstate-gray-dark);
+  border-color: var(--ncstate-gray-dark);
+  color: var(--ncstate-white);
+  font-weight: 600;
+}
+
+.btn-secondary:hover {
+  background-color: var(--ncstate-black);
+  border-color: var(--ncstate-black);
+}
+
+/* Code blocks */
+pre {
+  background-color: #f5f5f5;
+  border: 1px solid var(--ncstate-gray-light);
+  border-radius: 4px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+code {
+  background-color: #f5f5f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* Horizontal rules */
+hr {
+  border-top: 2px solid var(--ncstate-gray-light);
+  margin: 2rem 0;
+}
+
+/* Utility Classes */
+.centered-div {
+  width: 80%;
+  text-align: center;
+  margin: 50px 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .centered-div {
+    width: 95%;
+    margin: 30px 10px;
+  }
+}
+
+/* Ensure proper spacing with NC State utility bar */
+body {
+  padding-top: 0;
+}
+
+/* Video responsive wrapper */
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Image responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
