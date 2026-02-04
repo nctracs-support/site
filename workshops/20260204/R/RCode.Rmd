@@ -1,0 +1,687 @@
+---
+title: "EDA Workshop 2"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(ggplot2)
+library(lubridate)
+library(scales)
+library(janitor)
+library(forcats)
+
+# Correlation heatmap helper
+library(reshape2)
+```
+
+# Data
+
+
+```{r}
+df <- read.csv("data.csv", stringsAsFactors = FALSE)
+df <- janitor::clean_names(df)  # optional
+```
+
+---
+
+# Part 2: Univariate Exploration
+
+## Exercise 2.2: Age Distribution
+
+### 1) Descriptive statistics for age
+
+```{r}
+age <- df$age_at_visit_years
+
+cat("Missing age:", sum(is.na(age)), "\n")
+print(summary(age))
+
+cat("Min age:", suppressWarnings(min(age, na.rm = TRUE)), "\n")
+cat("Max age:", suppressWarnings(max(age, na.rm = TRUE)), "\n")
+```
+
+### 2) Histogram of age distribution
+
+```{r}
+df %>%
+  filter(!is.na(age_at_visit_years)) %>%
+  ggplot(aes(x = age_at_visit_years)) +
+  geom_histogram(bins = 40) +
+  labs(
+    title = "Age Distribution",
+    x = "Age at visit (years)",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+### 3) Create age groups and show their distribution
+
+Pediatric: 0–18, Young Adult: 18–40, Middle Age: 40–65, Elderly: 65+
+
+```{r}
+df <- df %>%
+  mutate(
+    age_group = cut(
+      age_at_visit_years,
+      breaks = c(0, 18, 40, 65, 100),
+      labels = c("Pediatric", "Young Adult", "Middle Age", "Elderly"),
+      right = FALSE,
+      include.lowest = TRUE
+    )
+  )
+
+age_group_counts <- df %>%
+  count(age_group, sort = TRUE) %>%
+  mutate(pct = n / sum(n) * 100)
+
+age_group_counts
+```
+
+---
+
+## Exercise 2.3: Condition Analysis
+
+The `condition` column contains multiple conditions separated by colons (`:`).
+
+### 1) Parse conditions into individual items
+
+```{r}
+df <- df %>%
+  mutate(
+    condition_list = str_split(coalesce(condition, ""), ":")
+  )
+```
+
+### 2) Explode and count frequency of each condition
+
+```{r}
+all_conditions <- df %>%
+  select(visit_occurrence_id, condition_list) %>%
+  unnest(condition_list) %>%
+  mutate(condition_item = str_trim(condition_list)) %>%
+  filter(condition_item != "")
+
+condition_counts <- all_conditions %>%
+  count(condition_item, sort = TRUE)
+
+head(condition_counts, 10)
+```
+
+### 3) Bar chart of top 10 conditions
+
+```{r}
+top10 <- condition_counts %>% slice_max(n, n = 10)
+
+ggplot(top10, aes(x = fct_reorder(condition_item, n), y = n)) +
+  geom_col() +
+  coord_flip() +
+  labs(title = "Top 10 Conditions", x = "Condition", y = "Count") +
+  theme_minimal()
+```
+
+---
+
+## Exercise 2.4: Vital Signs Distribution (COVID-Suspected Patients)
+
+Many vital signs are only recorded for COVID-suspected visits.
+
+### 1) Filter to COVID-suspected patients
+
+```{r}
+covid_df <- df %>%
+  filter(observation_source == "Suspected COVID-19")
+
+cat("COVID-suspected visits:", nrow(covid_df), "\n")
+cat("Total visits:", nrow(df), "\n")
+cat("Percentage:", round(nrow(covid_df) / nrow(df) * 100, 1), "%\n")
+```
+
+### 2) Descriptive statistics for vital signs
+
+```{r}
+vital_cols <- c(
+  "oxygen_saturation_percent",
+  "respiratory_rate_per_minute",
+  "heart_rate_bpm",
+  "body_temperature_c",
+  "systolic",
+  "diastolic"
+)
+
+vital_summary <- covid_df %>%
+  summarise(
+    across(
+      all_of(vital_cols),
+      list(
+        n = ~sum(!is.na(.)),
+        missing = ~sum(is.na(.)),
+        mean = ~mean(., na.rm = TRUE),
+        sd = ~sd(., na.rm = TRUE),
+        median = ~median(., na.rm = TRUE),
+        p25 = ~quantile(., 0.25, na.rm = TRUE),
+        p75 = ~quantile(., 0.75, na.rm = TRUE),
+        min = ~min(., na.rm = TRUE),
+        max = ~max(., na.rm = TRUE)
+      ),
+      .names = "{.col}_{.fn}"
+    )
+  )
+
+vital_summary
+```
+
+### 3) Histograms (2x2) for key vitals
+
+```{r}
+vitals_long <- covid_df %>%
+  select(all_of(vital_cols)) %>%
+  pivot_longer(cols = everything(), names_to = "vital", values_to = "value")
+
+vitals_long %>%
+  filter(vital %in% c(
+    "oxygen_saturation_percent",
+    "respiratory_rate_per_minute",
+    "heart_rate_bpm",
+    "body_temperature_c"
+  )) %>%
+  ggplot(aes(x = value)) +
+  geom_histogram(bins = 40) +
+  facet_wrap(~vital, scales = "free", ncol = 2) +
+  labs(
+    title = "Vital Signs Distributions (COVID-Suspected)",
+    x = "Value",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+**Question:** Are there any concerning values in the vital signs? What might explain extreme values?
+
+```{r, eval=FALSE}
+# Your answer here
+```
+
+---
+
+## Exercise 2.5: Visit Type Distribution
+
+Count inpatient vs outpatient visits, compute percentages, and plot.
+
+```{r}
+visit_counts <- df %>%
+  count(visit_type, sort = TRUE) %>%
+  mutate(pct = n / sum(n) * 100)
+
+visit_counts
+```
+
+```{r}
+ggplot(visit_counts, aes(x = fct_reorder(visit_type, n), y = n)) +
+  geom_col() +
+  coord_flip() +
+  labs(title = "Visit Type Distribution", x = "Visit type", y = "Count") +
+  theme_minimal()
+```
+
+---
+
+## Exercise 2.6: Outlier Detection in Vital Signs
+
+```{r}
+outlier_flags <- covid_df %>%
+  transmute(
+    temp = body_temperature_c,
+    o2 = oxygen_saturation_percent,
+    hr = heart_rate_bpm,
+    rr = respiratory_rate_per_minute,
+    temp_extreme = !is.na(temp) & (temp < 34 | temp > 42),
+    o2_critical = !is.na(o2) & (o2 < 80),
+    o2_concerning = !is.na(o2) & (o2 < 90),
+    hr_extreme = !is.na(hr) & (hr > 180),
+    rr_extreme = !is.na(rr) & (rr > 40)
+  )
+
+summary(outlier_flags)
+```
+
+---
+
+# Part 3: Relational Exploration
+
+## Exercise 3.1: Correlation Matrix (COVID-suspected)
+
+```{r}
+numeric_cols <- c(
+  "age_at_visit_years",
+  "oxygen_saturation_percent",
+  "respiratory_rate_per_minute",
+  "heart_rate_bpm",
+  "body_temperature_c",
+  "systolic",
+  "diastolic"
+)
+
+corr_df <- covid_df %>%
+  select(all_of(numeric_cols)) %>%
+  mutate(across(everything(), as.numeric))
+
+corr_mat <- cor(corr_df, use = "pairwise.complete.obs")
+
+corr_long <- reshape2::melt(corr_mat)
+
+ggplot(corr_long, aes(Var1, Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(limits = c(-1, 1)) +
+  coord_equal() +
+  labs(title = "Correlation Heatmap (COVID-Suspected)", x = "", y = "", fill = "Correlation") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r, eval=FALSE}
+# Question: What correlations do you observe? Any surprising or concerning?
+# Your answer here
+```
+
+---
+
+## Exercise 3.2: Temperature vs Oxygen Saturation (color by deceased)
+
+```{r}
+covid_df %>%
+  filter(!is.na(body_temperature_c), !is.na(oxygen_saturation_percent)) %>%
+  ggplot(aes(x = body_temperature_c, y = oxygen_saturation_percent, color = deceased)) +
+  geom_point(alpha = 0.4) +
+  labs(
+    title = "Temperature vs Oxygen Saturation (COVID-Suspected)",
+    x = "Body temperature (C)",
+    y = "Oxygen saturation (%)",
+    color = "Deceased"
+  ) +
+  theme_minimal()
+```
+
+---
+
+## Exercise 3.3: Condition Count and Vital Signs
+
+### 1) Create `condition_count` (colons + 1)
+
+```{r}
+df <- df %>%
+  mutate(
+    condition_count = if_else(
+      is.na(condition) | str_trim(condition) == "",
+      0L,
+      str_count(condition, ":") + 1L
+    )
+  )
+
+df %>% count(condition_count, sort = FALSE)
+```
+
+### 2) Compare mean vital signs between 1–2 vs 3+ conditions (COVID-suspected)
+
+```{r}
+covid_df <- covid_df %>%
+  mutate(
+    condition_count = if_else(
+      is.na(condition) | str_trim(condition) == "",
+      0L,
+      str_count(condition, ":") + 1L
+    ),
+    high_condition_count = condition_count >= 3
+  )
+
+mean_vitals_by_group <- covid_df %>%
+  group_by(high_condition_count) %>%
+  summarise(across(all_of(vital_cols), ~mean(., na.rm = TRUE)), .groups = "drop")
+
+mean_vitals_by_group
+```
+
+---
+
+## Exercise 3.4: Visit Type and Vital Signs
+
+Box plots showing oxygen saturation by visit type.
+
+```{r}
+covid_df %>%
+  filter(!is.na(oxygen_saturation_percent), !is.na(visit_type)) %>%
+  ggplot(aes(x = visit_type, y = oxygen_saturation_percent)) +
+  geom_boxplot(outlier.alpha = 0.2) +
+  coord_flip() +
+  labs(
+    title = "Oxygen Saturation by Visit Type (COVID-Suspected)",
+    x = "Visit type",
+    y = "Oxygen saturation (%)"
+  ) +
+  theme_minimal()
+```
+
+---
+
+## Exercise 3.5: Deceased Status and Vital Signs
+
+### 1) Mean/median vitals by deceased status
+
+```{r}
+vitals_deceased_summary <- covid_df %>%
+  group_by(deceased) %>%
+  summarise(
+    across(
+      all_of(vital_cols),
+      list(mean = ~mean(., na.rm = TRUE), median = ~median(., na.rm = TRUE)),
+      .names = "{.col}_{.fn}"
+    ),
+    .groups = "drop"
+  )
+
+vitals_deceased_summary
+```
+
+### 2) Boxplots comparing oxygen saturation
+
+```{r}
+covid_df %>%
+  filter(!is.na(oxygen_saturation_percent), !is.na(deceased)) %>%
+  ggplot(aes(x = deceased, y = oxygen_saturation_percent)) +
+  geom_boxplot(outlier.alpha = 0.2) +
+  labs(
+    title = "Oxygen Saturation by Deceased Status (COVID-Suspected)",
+    x = "Deceased (Y/N)",
+    y = "Oxygen saturation (%)"
+  ) +
+  theme_minimal()
+```
+
+---
+
+# Part 4: Structural Exploration
+
+## Exercise 4.1: Date Preparation
+
+Convert the date columns to Date and extract year/month.
+
+```{r}
+df <- df %>%
+  mutate(
+    visit_start_date = ymd(visit_start_date),
+    visit_end_date   = ymd(visit_end_date),
+    visit_year       = year(visit_start_date),
+    visit_month      = month(visit_start_date, label = TRUE, abbr = TRUE)
+  )
+```
+
+---
+
+## Exercise 4.2: Temporal Distribution of Visits
+
+### 1) Visits by year
+
+```{r}
+visits_by_year <- df %>% count(visit_year, sort = TRUE)
+visits_by_year
+```
+
+### 2) Bar chart of 2020 visits by month
+
+```{r}
+df %>%
+  filter(visit_year == 2020) %>%
+  count(visit_month) %>%
+  ggplot(aes(x = visit_month, y = n)) +
+  geom_col() +
+  labs(title = "Visits by Month (2020)", x = "Month", y = "Count") +
+  theme_minimal()
+```
+
+```{r, eval=FALSE}
+# What patterns do you observe?
+```
+
+---
+
+## Exercise 4.3: Length of Stay Analysis
+
+### 1) Length of stay (in days)
+
+```{r}
+df <- df %>%
+  mutate(length_of_stay = as.numeric(difftime(visit_end_date, visit_start_date, units = "days")))
+
+summary(df$length_of_stay)
+```
+
+### 2–4) Inpatient-only LOS stats + histogram
+
+```{r}
+inpatient_df <- df %>% filter(str_detect(visit_type, "Inpatient"))
+summary(inpatient_df$length_of_stay)
+
+inpatient_df %>%
+  filter(!is.na(length_of_stay)) %>%
+  ggplot(aes(x = length_of_stay)) +
+  geom_histogram(bins = 40) +
+  labs(title = "Length of Stay (Inpatient)", x = "Days", y = "Count") +
+  theme_minimal()
+```
+
+---
+
+## Exercise 4.4: Patient Visit History
+
+### 1) Visits per patient
+
+```{r}
+visits_per_patient <- df %>%
+  count(person_id, name = "n_visits") %>%
+  arrange(desc(n_visits))
+
+head(visits_per_patient, 10)
+```
+
+### 2) Percentage with multiple visits
+
+```{r}
+pct_multiple <- mean(visits_per_patient$n_visits > 1) * 100
+cat("Percent of patients with multiple visits:", round(pct_multiple, 2), "%\n")
+```
+
+### 3) Examine the patient with the most visits
+
+```{r}
+top_patient <- visits_per_patient$person_id[1]
+
+df %>%
+  filter(person_id == top_patient) %>%
+  arrange(visit_start_date) %>%
+  select(person_id, visit_start_date, visit_end_date, visit_type, deceased, observation_source, condition) %>%
+  head(50)
+```
+
+---
+
+## Exercise 4.5: Vaccination Timeline Analysis
+
+### 1) Days since last flu vaccination
+
+```{r}
+df <- df %>%
+  mutate(
+    flu_last_administered = ymd(flu_last_administered),
+    days_since_flu_vaccine = as.numeric(difftime(visit_start_date, flu_last_administered, units = "days"))
+  )
+
+summary(df$days_since_flu_vaccine)
+```
+
+### 2) Percent vaccinated within past year (<= 365 days)
+
+```{r}
+pct_vax_past_year <- df %>%
+  filter(!is.na(days_since_flu_vaccine)) %>%
+  summarise(pct = mean(days_since_flu_vaccine <= 365, na.rm = TRUE) * 100) %>%
+  pull(pct)
+
+cat("Percent vaccinated within past year:", round(pct_vax_past_year, 2), "%\n")
+```
+
+---
+
+# Part 5: Comparative Exploration
+
+## Exercise 5.1: Mortality Rate Comparison
+
+### 1) Overall mortality rate
+
+```{r}
+overall_mortality_rate <- mean(df$deceased == "Y", na.rm = TRUE) * 100
+cat("Overall mortality rate:", round(overall_mortality_rate, 2), "%\n")
+```
+
+### 2) Mortality by visit type
+
+```{r}
+mortality_by_visit <- df %>%
+  filter(!is.na(visit_type), !is.na(deceased)) %>%
+  tabyl(visit_type, deceased) %>%
+  adorn_percentages("row") %>%
+  adorn_pct_formatting(digits = 2)
+
+mortality_by_visit
+```
+
+### 3) Mortality by age group
+
+```{r}
+if (!"age_group" %in% names(df)) {
+  df <- df %>%
+    mutate(
+      age_group = cut(
+        age_at_visit_years,
+        breaks = c(0, 18, 40, 65, 100),
+        labels = c("Pediatric", "Young Adult", "Middle Age", "Elderly"),
+        right = FALSE,
+        include.lowest = TRUE
+      )
+    )
+}
+
+mortality_by_age <- df %>%
+  filter(!is.na(age_group), !is.na(deceased)) %>%
+  tabyl(age_group, deceased) %>%
+  adorn_percentages("row") %>%
+  adorn_pct_formatting(digits = 2)
+
+mortality_by_age
+```
+
+---
+
+## Exercise 5.2: Visit Type by Age Group
+
+```{r}
+visit_by_age <- df %>%
+  filter(!is.na(age_group), !is.na(visit_type)) %>%
+  tabyl(age_group, visit_type) %>%
+  adorn_percentages("row") %>%
+  adorn_pct_formatting(digits = 2)
+
+visit_by_age
+```
+
+---
+
+## Exercise 5.3: COVID vs Non-COVID Comparison
+
+Compare average age, inpatient rate, mortality rate.
+
+```{r}
+df <- df %>%
+  mutate(
+    is_covid_suspected = observation_source == "Suspected COVID-19",
+    is_inpatient = str_detect(visit_type, "Inpatient")
+  )
+
+covid_summary <- df %>%
+  group_by(is_covid_suspected) %>%
+  summarise(
+    avg_age = mean(age_at_visit_years, na.rm = TRUE),
+    mortality_rate = mean(deceased == "Y", na.rm = TRUE) * 100,
+    inpatient_rate = mean(is_inpatient, na.rm = TRUE) * 100,
+    n_visits = n(),
+    .groups = "drop"
+  )
+
+covid_summary
+```
+
+---
+
+## Exercise 5.4: Statistical Significance Testing (Mann–Whitney)
+
+Test difference in oxygen saturation between deceased and non-deceased (COVID-suspected).
+
+```{r}
+deceased_o2 <- covid_df %>% filter(deceased == "Y") %>% pull(oxygen_saturation_percent) %>% na.omit()
+survived_o2 <- covid_df %>% filter(deceased == "N") %>% pull(oxygen_saturation_percent) %>% na.omit()
+
+cat("Deceased - Mean:", round(mean(deceased_o2), 2),
+    "Median:", round(median(deceased_o2), 2),
+    "n:", length(deceased_o2), "\n")
+cat("Survived - Mean:", round(mean(survived_o2), 2),
+    "Median:", round(median(survived_o2), 2),
+    "n:", length(survived_o2), "\n")
+```
+
+```{r}
+# Wilcoxon rank-sum test (equivalent to Mann–Whitney U)
+mw_test <- wilcox.test(deceased_o2, survived_o2, alternative = "two.sided")
+mw_test
+```
+
+```{r, eval=FALSE}
+# Interpretation: if p-value < 0.05, conclude a statistically significant difference.
+```
+
+---
+
+## Exercise 5.5: Condition-Specific Analysis
+
+Identify conditions most associated with inpatient admission.
+
+```{r}
+cond_rates <- df %>%
+  mutate(
+    condition_item = str_split(coalesce(condition, ""), ":"),
+    is_inpatient = str_detect(visit_type, "Inpatient")
+  ) %>%
+  select(visit_occurrence_id, condition_item, is_inpatient) %>%
+  unnest(condition_item) %>%
+  mutate(condition_item = str_trim(condition_item)) %>%
+  filter(condition_item != "") %>%
+  group_by(condition_item) %>%
+  summarise(
+    inpatient_rate = mean(is_inpatient, na.rm = TRUE) * 100,
+    total_visits = n(),
+    .groups = "drop"
+  ) %>%
+  filter(total_visits >= 100) %>%
+  arrange(desc(inpatient_rate))
+
+head(cond_rates, 10)
+```
+
+---
