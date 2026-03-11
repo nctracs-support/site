@@ -1,0 +1,274 @@
+---
+title: "Power via Simulation"
+author: "Emily Griffith and John Slankas"
+date: "2026-03-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Power Calculations 
+
+
+Power is the ability to detect a false null hypothesis.
+
+It depends on several factors, including the:
+
+* effect size of interest,
+* number of observations,
+* variability of the observed process, and
+* study design.
+
+
+#### Why calculate power?
+
+1. Power calculations are very helpful in making sure that you have a clearly articulated research question and a designed study. 
+    * Power calculations require knowing what you’re measuring, what you expect those values to be, and what kind of difference you’d like to detect.
+
+2. Power calculations help keep your research honest!
+    * Performing power calculations can help prevent issues like cherry-picking or p-hacking because they require careful planning.
+
+3. Power calculations help make sure you don’t waste your time
+    * An underpowered study may not be worth doing.
+
+#### Power calculation examples:
+
+The goal of a study with a hypothesis test is to make a decision.
+
+We have systolic blood pressure on suspected COVID-19 cases in our synthetic dataset based on OMOP data.
+
+The mean systolic blood pressure is 121 (standard deviation of 13) for patients with suspected COVID-19.
+
+The overall systolic blood pressure is 120 (standard deviation of 13) for patients.
+
+### Designing a simulation study:
+
+1. What are our aims and objectives?
+
+We want to see if suspected COVID-19 patients present with higher systolic blood pressure than other patients.
+
+2. How will you generate the data?
+
+We have systolic blood pressure on suspected COVID-19 cases in our synthetic dataset based on OMOP data. 
+The mean systolic blood pressure is 121 (standard deviation of 13) for patients with suspected COVID-19.
+The overall systolic blood pressure is 120 (standard deviation of 13) for patients.
+
+We can generate data from two normal distributions-- one for suspected COVID-19 and one for other patients.
+
+3. Which scenarios will you investigate?
+
+We can investigate equal numbers of patients per group in increasing increments of 50.
+
+4. What statistical analysis method(s) will be used?
+
+Comparisons will be made using a two-sample t-test.
+
+5. What estimates will you store for each simulation?
+
+We can store:
+* the mean difference
+* the t-statistic
+* the p-value
+
+6. How many simulations will you run?
+
+We will run 10,000 simulations.
+
+7. How will you evaluate the results?
+
+We will examine the proportion of p-values that are below 0.05.
+
+8. How will you present the results?
+
+We will present the results in a table and a plot.
+
+
+```{r example01a}
+library(ggplot2)
+
+set.seed(0311)
+
+# select sample size
+n = 50
+sims = 1000
+
+# create lists to store values we'll save
+pvals <- rep(1, sims)
+tvals <- rep(1, sims)
+meandiffs <- rep(1, sims)
+
+for (i in 1:sims){
+  # generate data
+  null_bp <- rnorm(n, mean=120, sd=13)
+  covid_bp <- rnorm(n, mean=121, sd=13)
+
+  # perform the t-test
+  results <- t.test(null_bp, covid_bp)
+
+  # save the results
+  pvals[i] <- results$p.value
+  tvals[i] <-results$statistic
+  meandiffs[i] <- results$estimate[1] - results$estimate[2]
+}
+
+```
+
+Now that we have these values, let's look at them!
+
+The red dotted lines indicate statistical significance (at the 0.05-level).
+
+```{r example01b}
+
+p1 <-ggplot() +
+    geom_histogram(aes(x=meandiffs), alpha = 0.5, bins = 50)
+    labs(title = "Mean Differences between CoVID vs. Non-COVID Systolic BP", x="Mean Difference", y="Frequency")
+
+p1
+
+p2 <-ggplot() +
+    geom_histogram(aes(x=tvals), alpha = 0.5, bins = 50)+
+    geom_vline(xintercept = qt(p=.025, df= (n-1), lower.tail=TRUE), linetype="dotted", color = "red", linewidth=1.5)
+    labs(title = "T-Statistics for CoVID vs. Non-COVID Systolic BP", x="T-Statistic for Difference", y="Frequency")
+
+p2
+
+p3 <-ggplot() +
+    geom_histogram(aes(x=pvals), alpha = 0.5, bins = 50)+
+    geom_vline(xintercept = 0.05, linetype="dotted", color = "red", linewidth=1.5)
+    labs(title = "P-values for CoVID vs. Non-COVID Systolic BP", x="P-values", y="Frequency")
+
+p3
+```
+```{r example01c}
+
+# Calculate power
+
+power <- sum(pvals < 0.05)/length(pvals)
+
+print(power)
+
+```
+
+This example is looking at a __very__ small difference, meaning that we have very low power with a small sample size. Let's do the same exercise, but we'll increase the sample size to 1,000 patients per group.
+
+
+```{r example02a}
+library(ggplot2)
+
+set.seed(0311)
+
+# select sample size
+n = 1000
+sims = 1000
+
+# create lists to store values we'll save
+pvals <- rep(1, sims)
+tvals <- rep(1, sims)
+meandiffs <- rep(1, sims)
+
+for (i in 1:sims){
+  # generate data
+  null_bp <- rnorm(n, mean=120, sd=13)
+  covid_bp <- rnorm(n, mean=121, sd=13)
+
+  # perform the t-test
+  results <- t.test(null_bp, covid_bp)
+
+  # save the results
+  pvals[i] <- results$p.value
+  tvals[i] <-results$statistic
+  meandiffs[i] <- results$estimate[1] - results$estimate[2]
+}
+
+```
+
+Now that we have these values, let's look at them!
+
+The red dotted lines indicate statistical significance (at the 0.05-level).
+
+```{r example02b}
+
+p1 <-ggplot() +
+    geom_histogram(aes(x=meandiffs), alpha = 0.5, bins = 50)
+    labs(title = "Mean Differences between CoVID vs. Non-COVID Systolic BP", x="Mean Difference", y="Frequency")
+
+p1
+
+p2 <-ggplot() +
+    geom_histogram(aes(x=tvals), alpha = 0.5, bins = 50)+
+    geom_vline(xintercept = qt(p=.025, df= (n-1), lower.tail=TRUE), linetype="dotted", color = "red", linewidth=1.5)
+    labs(title = "T-Statistics for CoVID vs. Non-COVID Systolic BP", x="T-Statistic for Difference", y="Frequency")
+
+p2
+
+p3 <-ggplot() +
+    geom_histogram(aes(x=pvals), alpha = 0.5, bins = 50)+
+    geom_vline(xintercept = 0.05, linetype="dotted", color = "red", linewidth=1.5)
+    labs(title = "P-values for CoVID vs. Non-COVID Systolic BP", x="P-values", y="Frequency")
+
+p3
+```
+```{r example02c}
+
+# Calculate power
+
+power <- sum(pvals < 0.05)/length(pvals)
+
+print(power)
+
+```
+The power is still pretty low, but it's higher than it was!
+
+We can also make it easier to try different values of n by writing a function for our code.
+
+```{r example01d}
+
+twosampt_power <- function(mean1, mean2, sd, n, sims, seed){
+  
+  set.seed(seed)
+
+  # create lists to store values we'll save
+  pvals <- rep(1, sims)
+  tvals <- rep(1, sims)
+  meandiffs <- rep(1, sims)
+
+  for (i in 1:sims){
+    # generate data
+    null_bp <- rnorm(n, mean=mean1, sd=sd)
+    covid_bp <- rnorm(n, mean=mean2, sd=sd)
+  
+    # perform the t-test
+    results <- t.test(null_bp, covid_bp)
+  
+    # save the results
+    pvals[i] <- results$p.value
+    tvals[i] <-results$statistic
+    meandiffs[i] <- results$estimate[1] - results$estimate[2]
+  }
+  power = sum(pvals < 0.05) / length(pvals)
+  return(power)
+}
+
+print(twosampt_power(mean1 = 120, mean2 = 121, sd = 13, n = 50, sims = 1000, seed = 919))
+
+```
+Now that we have a function, we can explore different sample sizes!
+
+``` {r example01e}
+print(twosampt_power(mean1 = 120, mean2 = 121, sd = 13, n = 500, sims = 1000, seed = 919))
+print(twosampt_power(mean1 = 120, mean2 = 121, sd = 13, n = 750, sims = 1000, seed = 919))
+print(twosampt_power(mean1 = 120, mean2 = 121, sd = 13, n = 1000, sims = 1000, seed = 919))
+print(twosampt_power(mean1 = 120, mean2 = 121, sd = 13, n = 1250, sims = 1000, seed = 919))
+print(twosampt_power(mean1 = 120, mean2 = 121, sd = 13, n = 1500, sims = 1000, seed = 919))
+
+```
+
+### Main concepts
+
+1. Data generation and statistical analysis are __critically important__ for doing power via simulation.
+
+2. If possible, use a small real dataset to figure out your analysis plan.
+
+3. Try a lot of different things to see what the landscape of power looks like.
