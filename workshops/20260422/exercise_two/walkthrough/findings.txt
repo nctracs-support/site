@@ -1,0 +1,96 @@
+Prompt:
+Review this codebase against AGENTS.md for compliance. Check for: security issues, exception handling problems, test quality, dependency management, type hint coverage, and Git hygiene. For each issue, explain the risk and provide the exact file and line number.
+
+
+Compliance Report
+                                                                                                                                                                                                                                                     
+  1. CRITICAL — SQL Injection via String Formatting                                                     
+
+  File: db.py:11
+  Rule: Never construct SQL queries using string formatting.
+
+  query = f"SELECT * FROM users WHERE username = '{username}'"
+
+  An f-string is used to embed user-supplied input directly into the query. An attacker can pass a username like ' OR '1'='1 to dump the entire users table, or '; DROP TABLE users; -- to destroy data. This is a textbook SQL injection
+  vulnerability.
+
+  Fix: Use parameterized queries: conn.execute("SELECT * FROM users WHERE username = ?", (username,))
+
+  ---
+  2. HIGH — Bare except: pass Silences All Errors
+
+  File: app.py:20–21
+  Rule: Never use a bare except: or except Exception: pass.
+
+  except:
+      pass
+
+  This catches everything — KeyboardInterrupt, SystemExit, MemoryError, corrupt JSON, permission errors — and discards them silently. A malformed config.json or a missing-permission error will go undetected, making debugging nearly impossible.
+
+  Fix: Catch only (FileNotFoundError, json.JSONDecodeError) and log or surface the error appropriately.
+
+  ---
+  3. HIGH — Dependency Management Uses requirements.txt, Not pyproject.toml
+
+  File: requirements.txt (root)
+  Rule: Use pip via pyproject.toml. Do NOT use requirements.txt.
+
+  A requirements.txt exists and there is no pyproject.toml. This violates the declared tooling standard.
+
+  ---
+  4. MEDIUM — Missing Type Hints on All Public Functions
+
+  Rule: Type hints required on all public function signatures and routes.
+
+  ┌───────────┬────────────────────────────────┬─────────────────────────────┐
+  │   File    │            Function            │            Issue            │
+  ├───────────┼────────────────────────────────┼─────────────────────────────┤
+  │ db.py:3   │ get_db_connection()            │ No return type annotation   │
+  ├───────────┼────────────────────────────────┼─────────────────────────────┤
+  │ db.py:8   │ get_user_by_username(username) │ No parameter or return type │
+  ├───────────┼────────────────────────────────┼─────────────────────────────┤
+  │ app.py:8  │ get_user(username)             │ No parameter or return type │
+  ├───────────┼────────────────────────────────┼─────────────────────────────┤
+  │ app.py:15 │ load_config()                  │ No return type              │
+  └───────────┴────────────────────────────────┴─────────────────────────────┘
+
+  ---
+  5. MEDIUM — Test Asserts a Constant, Not the Response
+
+  File: test_app.py:15
+  Rule: Tests must actually validate behavior.
+
+  assert expected_status == 404
+
+  This asserts that the literal 404 == 404 — it always passes regardless of what the server returns. The actual response status (response.status_code) is never checked, so the test provides zero coverage.
+
+  Fix: assert response.status_code == 404
+
+  ---
+  6. LOW — .gitignore Only Covers venv/, Missing Common Exclusions
+
+  File: .gitignore:1
+  Rule: Never commit virtual environments, caches, or secrets.
+
+  Only venv/** is listed. The following are unprotected and could be accidentally committed:
+  - __pycache__/ and *.pyc
+  - *.db files (e.g., database.db would commit the live SQLite database with user data)
+  - .env / secret files
+  - .DS_Store (macOS)
+
+  The database.db omission is particularly risky given the SQL injection issue above.
+
+  ---
+  Summary
+
+  ┌──────────┬───────┬────────────────────────────────────────────┐
+  │ Severity │ Count │                   Issues                   │
+  ├──────────┼───────┼────────────────────────────────────────────┤
+  │ Critical │ 1     │ SQL injection                              │
+  ├──────────┼───────┼────────────────────────────────────────────┤
+  │ High     │ 2     │ Bare except, wrong dependency tool         │
+  ├──────────┼───────┼────────────────────────────────────────────┤
+  │ Medium   │ 2     │ Missing type hints, useless test assertion │
+  ├──────────┼───────┼────────────────────────────────────────────┤
+  │ Low      │ 1     │ Incomplete .gitignore                      │
+  └──────────┴───────┴────────────────────────────────────────────┘

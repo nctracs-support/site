@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../ncstate-theme.css">
+
+    <link rel="icon" type="image/x-icon" href="https://cdn.ncsu.edu/brand-assets/favicons/favicon.ico" sizes="any">
+    <link rel="icon" href="https://cdn.ncsu.edu/brand-assets/favicons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="https://cdn.ncsu.edu/brand-assets/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="https://cdn.ncsu.edu/brand-assets/favicons/manifest.webmanifest">
+
+    <title>NC TraCS: AI Coding Agents: Disciplined Development</title>
+  </head>
+  <body>
+  <div id="ncstate-utility-bar" data-prop-show-brick="1" data-prop-cse-id="00578865650663686:7xmauxacbr4"></div>
+  <script src="https://cdn.ncsu.edu/brand-assets/utility-bar/v3/ncstate-utility-bar.js"></script>
+
+  <div class="container-fluid" style="margin:70px 15px 20px 20px;">
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+
+        <h1 class="mb-2">AI Coding Agents: Disciplined Development</h1>
+        <p class="text-muted mb-3">April 22, 2026</p>
+        <p class="lead">Learn how to work effectively with AI coding agents using a disciplined, spec-driven workflow. This workshop covers specification writing, iterative prompt planning, and using agents to review and improve code quality.</p>
+
+        <div class="row g-4 mt-2">
+
+          <!-- Workshop Materials -->
+          <div class="col-12">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title">Workshop Materials</h3>
+                <p class="card-text">Slides and process guides for the workshop.</p>
+
+                <h5 class="mt-3">Slides</h5>
+                <div class="d-flex gap-2 flex-wrap mb-4">
+                  <a href="workshop_agents_tracs.pptx" class="btn btn-primary">📊 PowerPoint</a>
+                  <a href="workshop_agents_tracs.pdf" class="btn btn-primary">📄 PDF</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Prompt Libraries -->
+          <div class="col-12">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title">Prompt Libraries</h3>
+                <p class="card-text">Reference prompt collections for data science workflows with AI coding agents.</p>
+                <div class="d-flex gap-2 flex-wrap">
+                  <a href="ds-prompt-library.md" class="btn btn-outline-primary">📚 Data Science Prompt Library</a>
+                  <a href="spec-driven-ds-prompts.md" class="btn btn-outline-primary">📋 Spec-Driven DS Prompts</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise One -->
+          <div class="col-12">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title">Exercise 1 — Spec-Driven Development</h3>
+                <p class="card-text">Build a command-line temperature anomaly detector from scratch using a disciplined, spec-first workflow. You will iteratively develop a specification through conversation, critique it, plan an implementation, and then build it with AI assistance.</p>
+
+                <h5 class="mt-3">The Problem</h5>
+                <p>Create a CLI tool that reads a CSV of daily temperature readings, detects anomalies (days more than 2 standard deviations from a 30-day rolling average), and outputs a list of flagged dates, deviation magnitudes, and an ASCII chart. The tool must validate the schema, handle missing values explicitly, and include tests.</p>
+
+                <h5 class="mt-3">Data</h5>
+                <div class="d-flex gap-2 flex-wrap mb-4">
+                  <a href="exercise_one/temperature.csv" class="btn btn-outline-primary">📊 temperature.csv</a>
+                </div>
+
+                <h5>Prompts</h5>
+                <p class="small text-muted">Use these prompts in sequence with Claude or another AI coding agent.</p>
+                <div class="row g-3 mt-1">
+                  <div class="col-md-6">
+                    <div class="border rounded p-3 h-100">
+                      <h6>Prompt 1 — Gather Requirements</h6>
+                      <p class="small">Ask one question at a time to iteratively develop a thorough, step-by-step specification.</p>
+                      <code class="small d-block bg-light p-2 rounded">Ask me one question at a time so we can develop a thorough, step-by-step spec for this idea. Each question should build on my previous answers, and our end goal is to have a detailed specification I can hand off to a developer. Let's do this iteratively and dig into every relevant detail. Remember, only one question at a time.</code>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="border rounded p-3 h-100">
+                      <h6>Prompt 2 — Compile Specification</h6>
+                      <p class="small">Consolidate the conversation into a developer-ready specification document.</p>
+                      <code class="small d-block bg-light p-2 rounded">Now that we've wrapped up the brainstorming process, can you compile our findings into a comprehensive, developer-ready specification? Include all relevant requirements, architecture choices, data handling details, error handling strategies, and a testing plan so a developer can immediately begin implementation.</code>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="border rounded p-3 h-100">
+                      <h6>Prompt 3 — Critique the Specification</h6>
+                      <p class="small">Have the agent act as a senior architect and identify gaps, ambiguities, and risks before implementation.</p>
+                      <code class="small d-block bg-light p-2 rounded">You are a senior software architect reviewing a developer-ready specification for an agentic coding system. Evaluate whether the specification is: Clear, Complete, Consistent, Correct, Testable, and Unambiguous. Identify missing requirements, ambiguities, inconsistencies, hidden assumptions, edge cases, and testability weaknesses. For each issue: quote the problematic section, explain the risk, and propose a precise improvement. Conclude with a readiness assessment. <em>[Attach specification.md]</em></code>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="border rounded p-3 h-100">
+                      <h6>Prompt 4 — Build the Implementation Plan</h6>
+                      <p class="small">Generate a step-by-step blueprint broken into small, TDD-friendly implementation prompts.</p>
+                      <code class="small d-block bg-light p-2 rounded">Draft a detailed, step-by-step blueprint for building this project. Break it into small, iterative chunks that build on each other. From here, provide a series of prompts for a code-generation LLM that will implement each step in a test-driven manner. Prioritize best practices, incremental progress, and early testing. Each prompt should build on the previous prompts and end with wiring things together. <em>[Attach specification]</em></code>
+                    </div>
+                  </div>
+                </div>
+
+                <h5 class="mt-4">Walkthrough</h5>
+                <p class="small text-muted">Example artifacts produced by running through the exercise.</p>
+                <div class="d-flex gap-2 flex-wrap">
+                  <a href="exercise_one/walkthrough/prompt_one.pdf" class="btn btn-sm btn-outline-primary">📄 Prompt 1 (PDF)</a>
+                  <a href="exercise_one/walkthrough/specification.md" class="btn btn-sm btn-outline-primary">📝 Specification v1</a>
+                  <a href="exercise_one/walkthrough/specification_2.md" class="btn btn-sm btn-outline-primary">📝 Specification v2</a>
+                  <a href="exercise_one/walkthrough/review.md" class="btn btn-sm btn-outline-primary">🔍 Spec Review</a>
+                  <a href="exercise_one/walkthrough/prompt_plan.md" class="btn btn-sm btn-outline-primary">📋 Implementation Plan</a>
+                  <a href="exercise_one/walkthrough/claude_session.txt" class="btn btn-sm btn-outline-primary">💬 Session Transcript</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise Two -->
+          <div class="col-12">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title">Exercise 2 — Red-Teaming Code</h3>
+                <p class="card-text">Use Claude Code as a code reviewer. A deliberately flawed codebase contains six intentional issues spanning security, error handling, test quality, and project hygiene. Your job is to prompt the agent, judge its findings, and then use it to apply fixes.</p>
+
+                <h5 class="mt-3">Known Issues</h5>
+                <div class="table-responsive mb-4">
+                  <table class="table table-sm table-bordered">
+                    <thead class="table-light">
+                      <tr><th>#</th><th>Issue</th><th>Category</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>1</td><td><code>requirements.txt</code> instead of <code>pyproject.toml</code></td><td>Toolchain compliance</td></tr>
+                      <tr><td>2</td><td>SQL query built with f-string formatting</td><td>Security (injection)</td></tr>
+                      <tr><td>3</td><td>Bare <code>except: pass</code> swallowing errors</td><td>Error handling</td></tr>
+                      <tr><td>4</td><td>Missing type hints on public functions</td><td>Code standards</td></tr>
+                      <tr><td>5</td><td>Test that passes but asserts the wrong variable</td><td>Test quality</td></tr>
+                      <tr><td>6</td><td>No <code>.gitignore</code> — venv/cache would be committed</td><td>Git hygiene</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <h5>Tasks</h5>
+                <div class="row g-3 mb-4">
+                  <div class="col-md-6">
+                    <div class="border rounded p-3 h-100">
+                      <h6>1. Agent Review</h6>
+                      <p class="small">Prompt Claude Code with:</p>
+                      <code class="small d-block bg-light p-2 rounded">Review this codebase against AGENTS.md for compliance. Check for: security issues, exception handling problems, test quality, dependency management, type hint coverage, and Git hygiene. For each issue, explain the risk and provide the exact file and line number.</code>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="border rounded p-3 h-100">
+                      <h6>2. Manual Verification</h6>
+                      <p class="small">Read the agent's findings and cross-reference with the code. Did it catch all six? Did it miss any? Did it flag anything that is actually fine (false positive)?</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="border rounded p-3 h-100">
+                      <h6>3. Fix</h6>
+                      <p class="small">Ask the agent to fix the highest-severity issue: apply the fix, run tests, and commit. Alternatively, enter planning mode, review a plan to fix all issues, then execute it.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="border rounded p-3 h-100">
+                      <h6>4. Approval Gating</h6>
+                      <p class="small">If the fix requires a dependency change, observe the approval gate in action — the agent should pause and ask before installing anything.</p>
+                      <p class="small text-muted">Alternative: use <code>/simplify</code> or <code>/review</code> in Claude Code to launch subagents for code reuse, quality, and efficiency review.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <h5>Codebase Files</h5>
+                <div class="d-flex gap-2 flex-wrap mb-3">
+                  <a href="exercise_two/AGENTS.md" class="btn btn-sm btn-outline-primary">📋 AGENTS.md</a>
+                  <a href="exercise_two/app.py" class="btn btn-sm btn-outline-primary">🐍 app.py</a>
+                  <a href="exercise_two/db.py" class="btn btn-sm btn-outline-primary">🐍 db.py</a>
+                  <a href="exercise_two/test_app.py" class="btn btn-sm btn-outline-primary">🧪 test_app.py</a>
+                  <a href="exercise_two/requirements.txt" class="btn btn-sm btn-outline-primary">📄 requirements.txt</a>
+                </div>
+
+                <h5>Walkthrough</h5>
+                <div class="d-flex gap-2 flex-wrap">
+                  <a href="exercise_two/walkthrough/findings.txt" class="btn btn-sm btn-outline-primary">🔍 Sample Findings</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Initial Formal Walkthrough -->
+          <div class="col-12">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title">Initial Formal Walkthrough</h3>
+                <p class="card-text">Reference materials from the initial formal process walkthrough, including the step-by-step guide and the supporting codex.</p>
+                <div class="d-flex gap-2 flex-wrap">
+                  <a href="formal_process_start.pdf" class="btn btn-outline-primary">📄 Formal Process (PDF)</a>
+                  <a href="formal_process_codex.txt" class="btn btn-outline-primary">📝 Formal Process Codex</a>
+                  <a href="sample_ds_project.tar" class="btn btn-outline-primary">📦 Sample DS Project</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /row -->
+
+        <div class="text-center my-5">
+          <a href="../../index.html" class="btn btn-primary btn-lg">Back to Home</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
